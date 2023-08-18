@@ -9,6 +9,9 @@ import UpdateUser from "../Pages/user/UpdateUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
 
+
+import Mediapgwpic from '../Pages/Media/Mediapgwpic'
+
 export default function Path() {
   return (
     <div>
@@ -54,9 +57,12 @@ export default function Path() {
               </Guard>
             }
           />
+               <Route path='media-gallery' element={<Guard><Mediapgwpic/></Guard>}/>
         </Route>
         <Route path="login" element={<Login />} />
       </Routes>
+
+       
     </div>
   );
 }
