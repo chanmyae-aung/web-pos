@@ -5,9 +5,27 @@ import { TbClipboardText } from "react-icons/tb";
 import { PiUserCirclePlusBold, PiUserSquareFill } from "react-icons/pi";
 import { TfiGallery } from "react-icons/tfi";
 import { HiOutlineLogout } from "react-icons/hi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../../Feature/API/authApi";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../Feature/Service/authSlice";
+import Cookies from "js-cookie";
 
 const SidebarItems = () => {
+  const nav=useNavigate();
+  const user=JSON.stringify(Cookies.get("user"));
+  const token=Cookies.get("token");
+  const [logout]=useLogoutMutation(token);
+  const dispatch=useDispatch();
+const logoutHandler=async()=>{
+  const {data}=await logout(token);
+  if(data?.message ==="logout successful"){
+    nav("/login");
+  }
+  dispatch(removeUser());
+  console.log(data);
+
+}
   return (
     <>
       {/* accordion control on sidebar */}
@@ -157,7 +175,7 @@ const SidebarItems = () => {
             chevron=" "
             className="px-5 active:bg-[#3F4245]  text-[#f5f5f5] text-[1rem]  pt-1 pb-2"
           >
-            <NavLink to={"/"}>
+            <NavLink >
               <span className="inline-flex gap-3 my-0 py-0">
                 <i>
                   <TfiGallery className="mt-1" />
@@ -203,7 +221,7 @@ const SidebarItems = () => {
             chevron=" "
             className="px-5 active:bg-[#3F4245]  text-[#f5f5f5] text-[1rem]  pt-1 pb-2"
           >
-            <NavLink to={"/"}>
+            <NavLink onClick={logoutHandler} to={"/login"}>
               <span className="inline-flex gap-3 my-0 py-0">
                 <i>
                   <HiOutlineLogout className="mt-1" />
