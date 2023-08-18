@@ -35,7 +35,7 @@ export default function Sidebar({ children }) {
     >
       {/* children components here*/}
       {children}
-      <Mediapgwpic/>
+
     </AppShell>
   );
 }
