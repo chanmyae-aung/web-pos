@@ -1,6 +1,10 @@
 import { Group } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { AiOutlineCloudUpload, AiOutlineOrderedList } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineCloudUpload,
+  AiOutlineOrderedList,
+} from "react-icons/ai";
 import { FcCancel } from "react-icons/fc";
 import { BsImages, BsFillGridFill } from "react-icons/bs";
 import React, { useState } from "react";
@@ -80,7 +84,19 @@ const elements = [
     ),
   },
 ];
-
+const ExpandedImageView = ({ image, onClose }) => (
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80">
+    <div className="max-w-3xl mx-auto p-4">
+      <button
+        onClick={onClose}
+        className="mt-4  py-2  bg-transparent text-white rounded-lg"
+      >
+        <AiOutlineClose className=" text-3xl" />
+      </button>
+      <img src={image.link} alt="" className="rounded-lg" />
+    </div>
+  </div>
+);
 const rows = elements.map((element) => (
   <tr key={element.No}>
     <td className=" text-white">{element.No}</td>
@@ -121,6 +137,7 @@ const images = [
 ];
 
 const Mediapgwpic = (props) => {
+  const [expandedImageId, setExpandedImageId] = useState(null);
   const [displayState, setDisplayState] = useState(false);
   const [displayState2, setDisplayState2] = useState(false);
   console.log(displayState);
@@ -132,6 +149,7 @@ const Mediapgwpic = (props) => {
           title={"Media"}
           firstRoute={"Media"}
           secondRoute={"Uploader"}
+          butt
         />
         <Dropzone
           className=" mt-6 mb-10 bg-softblack  hover:bg-softblack border border-solid"
@@ -192,12 +210,22 @@ const Mediapgwpic = (props) => {
           {images.map((i) => {
             return (
               <img
-                className="  rounded-2xl w-[300px] h-[200px]"
+                key={i.id}
                 src={i.link}
+                className=" cursor-pointer  hover:opacity-80  rounded-2xl w-[300px] h-[200px]"
+                onClick={() =>
+                  setExpandedImageId(i.id === expandedImageId ? null : i.id)
+                }
                 alt=""
               />
             );
           })}
+          {expandedImageId !== null && (
+            <ExpandedImageView
+              image={images.find((img) => img.id === expandedImageId)}
+              onClose={() => setExpandedImageId(null)}
+            />
+          )}
         </div>
         <div
           className={`${!displayState ? "block" : "hidden"} overflow-y-auto`}
