@@ -1,6 +1,7 @@
 import { AppShell, Navbar, Header } from "@mantine/core";
 import NavBar from "./NavBar";
 import SidebarItems from "./SidebarItems";
+import Mediapgwpic from "../../Pages/Media/Mediapgwpic";
 
 export default function Sidebar({ children }) {
   return (
@@ -34,6 +35,7 @@ export default function Sidebar({ children }) {
     >
       {/* children components here*/}
       {children}
+
     </AppShell>
   );
 }
