@@ -6,6 +6,7 @@ import UserDetail from '../Pages/user/UserDetail'
 import CreateUser from '../Pages/user/CreateUser'
 import UpdateUser from '../Pages/user/UpdateUser'
 import Home from '../Pages/Home'
+import Mediapgwpic from '../Pages/Media/Mediapgwpic'
 
 export default function Path() {
   return (
@@ -17,6 +18,7 @@ export default function Path() {
                 <Route path='user-detail' element={<UserDetail/>}/>
                 <Route path='create-user' element={<CreateUser/>}/>
                 <Route path='update-user' element={<UpdateUser/>}/>
+                <Route path='media-gallery' element={<Mediapgwpic/>}/>
             </Route>
         </Routes>
     </div>
