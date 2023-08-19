@@ -20,6 +20,7 @@ const SidebarItems = () => {
 const logoutHandler=async()=>{
   const {data}=await logout(token);
   if(data?.message ==="logout successful"){
+    //dispatch(removeUser());
     nav("/login");
   }
   dispatch(removeUser());
