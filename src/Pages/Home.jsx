@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar/Sidebar'
 
 export default function Home() {
   return (
-    <div className='flex w-screen bg-[#202124]'>
+    <div className='flex bg-[#202124]'>
       <div className='w-[20%] text-white'>
         <Sidebar/>
       </div>

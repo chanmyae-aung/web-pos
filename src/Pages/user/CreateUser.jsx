@@ -9,6 +9,9 @@ import Breadcrumb from "../../Components/Breadcrumb";
 
 export default function CreateUser() {
   const editImage = document.querySelector(".file");
+  const [userData, setUserData] = useState({
+    
+  })
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -40,7 +43,7 @@ export default function CreateUser() {
       </div>
       {/* path breadcrumbs */}
 
-      <main className="mt-7">
+      <main className="mt-7 bg-[#161618]">
         <form action="" className={`flex p-10 gap-10`}>
           {/* Personal Info */}
           <section
