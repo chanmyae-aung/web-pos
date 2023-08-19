@@ -10,7 +10,7 @@ import Breadcrumb from "../../Components/Breadcrumb";
 export default function UserDetail() {
   const editImage = document.querySelector(".file");
   return (
-    <div className={``}>
+    <div className={`w-full`}>
     {/* path breadcrumbs */}
     <div>
     <Breadcrumb icon={true} btnText={"Create"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
