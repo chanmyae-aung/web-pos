@@ -17,11 +17,16 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../Feature/Service/authSlice";
 
 const useStyles = createStyles((theme) => ({
+  text:{
+    color:"#3F4245"
+  },
   wrapper: {
     minHeight: rem(660),
-    backgroundSize: "cover",
+    backgroundSize: "fit",
+    backgroundRepeat:"no-repeat",
+    backgroundPosition:"right 20% top 50%",
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)",
+      "url(https://img.freepik.com/free-vector/self-checkout-concept-illustration_114360-2331.jpg)",
   },
 
   form: {
@@ -29,14 +34,22 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
     }`,
     minHeight: rem(660),
-    maxWidth: rem(450),
-    paddingTop: rem(80),
-    backgroundColor: "#3f4245",
+    maxWidth: rem(500),
+    paddingTop: rem(90),
+    backgroundColor:"#f5f5f5",
 
     [theme.fn.smallerThan("sm")]: {
       maxWidth: "100%",
     },
   },
+  button:{
+    ":hover":{
+      background:'#3F4245',
+      color:"#f5f5f5"
+    },
+    color:"#3F4245"
+    
+  }
 }));
 
 const Login = () => {
@@ -69,11 +82,12 @@ const Login = () => {
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
-        <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
+        <Title order={2} className={classes.text} ta="center" mt="md" mb={50}>
           Welcome back to MMS POS!
         </Title>
 
         <TextInput
+        className={classes.text}
         value={email}
         onChange={(e)=>setEmail(e.target.value)}
           label="Email address"
@@ -81,6 +95,7 @@ const Login = () => {
           size="md"
         />
         <PasswordInput
+        className={classes.text}
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
           label="Password"
@@ -88,12 +103,12 @@ const Login = () => {
           mt="md"
           size="md"
         />
-        <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button onClick={loginHandler} fullWidth mt="xl" size="md">
+        <Checkbox className={classes.text} label="Keep me logged in" mt="xl" size="md" />
+        <Button className={classes.button}  onClick={loginHandler} fullWidth mt="xl" size="md">
           Login
         </Button>
 
-        <Text ta="center" mt="md">
+        <Text className={classes.text} ta="center" mt="md">
           Forget Password?{" "}
           <Anchor
             href="#"

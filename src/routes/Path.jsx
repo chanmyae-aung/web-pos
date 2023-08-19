@@ -9,60 +9,32 @@ import UpdateUser from "../Pages/user/UpdateUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
 
-
-import Mediapgwpic from '../Pages/Media/Mediapgwpic'
+import Mediapgwpic from "../Pages/Media/Mediapgwpic";
+import AuthenticatedGuard from "./AuthenticatedGuard";
+import Error from "../Pages/Error";
 
 export default function Path() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route
-            index
-            element={
-              <Guard>
-                <Dashboard />
-              </Guard>
-            }
-          />
-          <Route
-            path="user-overview"
-            element={
-              <Guard>
-                <UserList />
-              </Guard>
-            }
-          />
-          <Route
-            path="user-detail"
-            element={
-              <Guard>
-                <UserDetail />
-              </Guard>
-            }
-          />
-          <Route
-            path="create-user"
-            element={
-              <Guard>
-                <CreateUser />
-              </Guard>
-            }
-          />
-          <Route
-            path="update-user"
-            element={
-              <Guard>
-                <UpdateUser />
-              </Guard>
-            }
-          />
-               <Route path='media-gallery' element={<Guard><Mediapgwpic/></Guard>}/>
+        <Route
+          path="/"
+          element={
+            <Guard>
+              <Home />
+            </Guard>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="user-overview" element={<UserList />} />
+          <Route path="user-detail" element={<UserDetail />} />
+          <Route path="create-user" element={<CreateUser />} />
+          <Route path="update-user" element={<UpdateUser />} />
+          <Route path="media-gallery" element={<Mediapgwpic />} />
         </Route>
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
+        <Route path="/*" element={<Error/>}/>
       </Routes>
-
-       
     </div>
   );
 }
