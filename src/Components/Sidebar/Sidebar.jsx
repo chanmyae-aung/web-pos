@@ -10,7 +10,7 @@ export default function Sidebar({ children }) {
       //drawer sidebar here
       navbar={
         <Navbar
-          width={{ base: 300 }}
+          width={{ base: 270 }}
           height={1000}
           p="xs"
           bg={"#161618"}

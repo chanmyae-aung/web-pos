@@ -17,7 +17,7 @@ export default function UserDetail() {
     </div>
     {/* path breadcrumbs */}
     <main className={`flex items-center mt-24`}>
-      <section className={`w-[70%] h-[70%] p-1`}>
+      <section className={`w-full h-[70%] p-1`}>
         <div className={`w-full relative p-8 bg-[#171717]`}>
           <div
             className={`w-40 h-40 absolute -top-16 rounded-full border p-1 flex justify-center items-center`}
