@@ -10,7 +10,9 @@ export default function Breadcrumb({
   thirdRoute,
   btnText,
   icon,
-  createUser
+  createUser,
+  updateUser,
+  editProfile,
 }) {
   const nav = useNavigate()
   return (
@@ -31,7 +33,7 @@ export default function Breadcrumb({
         </div>
         <div className="w-fit px-6 py-2 flex items-center gap-2 rounded font-semibold">
           <button onClick={() => {
-            createUser && nav("/create-user")
+            createUser && nav("/create-user") || editProfile && nav("/edit-profile")
           }} className="bg-blue-400 text-[#f5f5f5] w-fit px-6 py-2 flex items-center gap-2 rounded font-semibold">
             {icon && <BsPlus className="text-white text-2xl"/>}
             {btnText}

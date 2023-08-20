@@ -54,7 +54,7 @@ export default function CreateUser() {
       <div>
         <Breadcrumb
           icon={true}
-          btnText={"Create"}
+          btnText={"User list"}
           title={"User"}
           firstRoute={"User"}
           secondRoute={"Create User"}
