@@ -187,13 +187,13 @@ const Mediapgwpic = (props) => {
           <Breadcrumb firstRoute={"Media"} secondRoute={"Uploaded photo"} />
           <div className="">
             <AiOutlineOrderedList
-              onClick={() => setDisplayState(true) && setDisplayState2(false)}
+              onClick={() => setDisplayState(false) && setDisplayState2(true) }
               className={`${displayState ? "text-blue-800" : "text-gray-300"} ${
                 displayState ? "border-blue-800" : "border-gray-300"
               } hover:text-blue-800 hover:border-blue-800 text-gray-300 border cursor-pointer border-solid border-gray-300 mx-2 inline`}
             />
             <BsFillGridFill
-              onClick={() => setDisplayState(false) && setDisplayState2(true)}
+              onClick={() => setDisplayState(true) && setDisplayState2(false)}
               className={`${
                 !displayState ? "text-blue-800" : "text-gray-300"
               } ${
