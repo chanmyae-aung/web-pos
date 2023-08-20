@@ -96,7 +96,7 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel>
-            <NavLink
+            <NavLink to={'sale-recent'}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }
@@ -155,7 +155,8 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel>
-            <NavLink
+            <NavLink 
+            to={'user-overview'}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
               
             >
@@ -163,7 +164,7 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel className="">
-            <NavLink
+            <NavLink to={'/create-user'}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Create User
@@ -176,7 +177,7 @@ const logoutHandler=async()=>{
             chevron=" "
             className="px-5 active:bg-[#3F4245]  text-[#f5f5f5] text-[1rem]  pt-1 pb-2"
           >
-            <NavLink >
+            <NavLink to={'media-gallery'} >
               <span className="inline-flex gap-3 my-0 py-0">
                 <i>
                   <TfiGallery className="mt-1" />
@@ -199,7 +200,7 @@ const logoutHandler=async()=>{
           </Accordion.Control>
 
           <Accordion.Panel className="px-2 py-0  text-[1rem]">
-            <NavLink
+            <NavLink to={"/my-account"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }
@@ -208,7 +209,7 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel className="px-2 py-0  text-[1rem]">
-            <NavLink
+            <NavLink to={"/edit-profile"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }

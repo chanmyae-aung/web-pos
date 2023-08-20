@@ -8,11 +8,13 @@ import CreateUser from "../Pages/user/CreateUser";
 import UpdateUser from "../Pages/user/UpdateUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
-
 import Mediapgwpic from "../Pages/Media/Mediapgwpic";
 import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
+import Recent from "../Pages/Sale/Recent";
 import InventoryOverview from "../Pages/Inventory/InventoryOverview";
+import MyAccount from "../Pages/Profile/MyAccount";
+import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
 
 export default function Path() {
@@ -28,11 +30,14 @@ export default function Path() {
           }
         >
           <Route index element={<Dashboard />} />
+          <Route path="my-account" element={<MyAccount />} />
+          <Route path="edit-profile" element={<EditProfile />} />
           <Route path="user-overview" element={<UserList />} />
           <Route path="user-detail" element={<UserDetail />} />
           <Route path="create-user" element={<CreateUser />} />
           <Route path="update-user" element={<UpdateUser />} />
           <Route path="media-gallery" element={<Mediapgwpic />} />
+          <Route path="sale-recent" element={<Recent/>}/>
           <Route path="inventory-overview" element={<InventoryOverview/>}/>
           <Route path="adding-product" element={<AddProduct/>}/>
         </Route>
