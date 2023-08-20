@@ -9,16 +9,16 @@ import Typography from "@mui/material/Typography";
 const SaleCard = () => {
   return (
     <div className="mt-5 ">
-      <Card sx={{ minWidth: 300 }}>
+      <Card sx={{ minWidth: 200 }}>
         <CardMedia
-          sx={{ height: 190 }}
+          sx={{ height: 150 }}
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ868djAR5mIlAFnnjF---4paarCg48aQTr-g&usqp=CAU"
           title="green iguana"
         />
         <CardContent >
           <Typography
             sx={{ color: "#161618" }}
-            gutterBottom
+            
             variant="h5"
             component="div"
           >
@@ -26,7 +26,7 @@ const SaleCard = () => {
           </Typography>
           <Typography
             sx={{ color: "#161618" }}
-            gutterBottom
+            
             variant="p"
             component="div"
           >

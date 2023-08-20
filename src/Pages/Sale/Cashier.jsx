@@ -11,7 +11,7 @@ const Cashier = () => {
      <NavBar/>
     <div className=" flex gap-2 bg-[#161618]">
        
-   <div className="w-full mt-14 px-5">
+   <div className=" w-2/3 mt-14 px-5">
      {/* sale breadcrumb */}
      <div className=" pb-4  ">
         <Breadcrumbs aria-label="breadcrumb" style={{ color: "#f5f5f5" }}>
@@ -79,7 +79,7 @@ const Cashier = () => {
    </div>
 
 
-   <div className=" border-l mt-14 px-2 w-full">
+   <div className=" border-l mt-14 px-5 w-1/3">
     <Reciept/>
    </div>
      
