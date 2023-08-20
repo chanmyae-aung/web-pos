@@ -2,8 +2,7 @@ import React from "react";
 import { Breadcrumbs, Link } from "@mui/material";
 import SaleCard from "../../Components/Sidebar/SaleCard";
 import NavBar from "../../Components/Sidebar/NavBar";
-import Reciept from "../../Components/Reciept";
-
+import Reciept from "../../Components/Sale/Reciept";
 
 const Cashier = () => {
   return (
