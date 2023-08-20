@@ -13,6 +13,8 @@ import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
 import Recent from "../Pages/Sale/Recent";
 import InventoryOverview from "../Pages/Inventory/InventoryOverview";
+import MyAccount from "../Pages/Profile/MyAccount";
+import EditProfile from "../Pages/Profile/EditProfile";
 
 export default function Path() {
   return (
@@ -27,6 +29,8 @@ export default function Path() {
           }
         >
           <Route index element={<Dashboard />} />
+          <Route path="my-account" element={<MyAccount />} />
+          <Route path="edit-profile" element={<EditProfile />} />
           <Route path="user-overview" element={<UserList />} />
           <Route path="user-detail" element={<UserDetail />} />
           <Route path="create-user" element={<CreateUser />} />

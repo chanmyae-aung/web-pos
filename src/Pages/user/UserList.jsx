@@ -6,15 +6,17 @@ import Breadcrumb from '../../Components/Breadcrumb';
 import Pagination from '../../Components/Pagination';
 import Cookies from 'js-cookie';
 import { useGetAllUsersQuery } from '../../Feature/API/userApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserList() {
   const token = Cookies.get("token")
+  const nav = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
   const {data} = useGetAllUsersQuery({token, currentPage})
   const users = (data?.users.data)
   console.log(data)
 
-  const rows = users.map((i, index) => (
+  const rows = users?.map((i, index) => (
     <tr key={i.id}>
       <td>{index +1}</td>
       <td>{i.name}</td>
@@ -23,7 +25,7 @@ export default function UserList() {
       <td className="flex gap-5">
         <BsDash className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
         <MdOutlineEdit className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
-        <BsArrowRight className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
+        <BsArrowRight onClick={() => nav("/user-detail")} className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
       </td>
     </tr>
   ));
@@ -33,7 +35,7 @@ export default function UserList() {
     <>
     {/* path breadcrumbs */}
     <div>
-      <Breadcrumb createUser={true} icon={true} btnText={"Create"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
+      <Breadcrumb createUser={true} icon={true} btnText={"Create user"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
     </div>
     {/* path breadcrumbs */}
     <main className='border border-b-0 rounded mt-7'>
