@@ -89,7 +89,7 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel className="">
-            <NavLink
+            <NavLink to={"sale-cashier"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Cashier

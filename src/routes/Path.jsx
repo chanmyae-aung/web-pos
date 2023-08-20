@@ -13,6 +13,7 @@ import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
 import Recent from "../Pages/Sale/Recent";
 import InventoryOverview from "../Pages/Inventory/InventoryOverview";
+import Cashier from "../Pages/Sale/Cashier";
 import MyAccount from "../Pages/Profile/MyAccount";
 import EditProfile from "../Pages/Profile/EditProfile";
 
@@ -39,6 +40,7 @@ export default function Path() {
           <Route path="sale-recent" element={<Recent/>}/>
           <Route path="inventory-overview" element={<InventoryOverview/>}/>
         </Route>
+        <Route path="sale-cashier" element={<Cashier/>}/>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
         <Route path="/*" element={<Error/>}/>
       </Routes>
