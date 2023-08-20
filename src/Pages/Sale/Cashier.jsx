@@ -2,6 +2,7 @@ import React from "react";
 import { Breadcrumbs, Link } from "@mui/material";
 import SaleCard from "../../Components/Sidebar/SaleCard";
 import NavBar from "../../Components/Sidebar/NavBar";
+import Reciept from "../../Components/Reciept";
 
 
 const Cashier = () => {
@@ -79,7 +80,7 @@ const Cashier = () => {
 
 
    <div className=" border-l mt-14 px-2 w-full">
-    cashier
+    <Reciept/>
    </div>
      
     </div>
