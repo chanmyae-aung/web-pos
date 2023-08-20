@@ -8,8 +8,7 @@ import CreateUser from "../Pages/user/CreateUser";
 import UpdateUser from "../Pages/user/UpdateUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
-
-import Mediapgwpic from "../Pges/Media/Mediapgwpic";
+import Mediapgwpic from "../Pages/Media/Mediapgwpic";
 import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
 import Recent from "../Pages/Sale/Recent";
