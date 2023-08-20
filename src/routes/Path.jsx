@@ -9,10 +9,11 @@ import UpdateUser from "../Pages/user/UpdateUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
 
-import Mediapgwpic from "../Pages/Media/Mediapgwpic";
+import Mediapgwpic from "../Pges/Media/Mediapgwpic";
 import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
 import Recent from "../Pages/Sale/Recent";
+import InventoryOverview from "../Pages/Inventory/InventoryOverview";
 
 export default function Path() {
   return (
@@ -33,6 +34,7 @@ export default function Path() {
           <Route path="update-user" element={<UpdateUser />} />
           <Route path="media-gallery" element={<Mediapgwpic />} />
           <Route path="sale-recent" element={<Recent/>}/>
+          <Route path="inventory-overview" element={<InventoryOverview/>}/>
         </Route>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
         <Route path="/*" element={<Error/>}/>
