@@ -12,6 +12,7 @@ import Login from "../Pages/Login/Login";
 import Mediapgwpic from "../Pages/Media/Mediapgwpic";
 import AuthenticatedGuard from "./AuthenticatedGuard";
 import Error from "../Pages/Error";
+import Recent from "../Pages/Sale/Recent";
 
 export default function Path() {
   return (
@@ -31,6 +32,7 @@ export default function Path() {
           <Route path="create-user" element={<CreateUser />} />
           <Route path="update-user" element={<UpdateUser />} />
           <Route path="media-gallery" element={<Mediapgwpic />} />
+          <Route path="sale-recent" element={<Recent/>}/>
         </Route>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
         <Route path="/*" element={<Error/>}/>
