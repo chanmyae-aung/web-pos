@@ -116,14 +116,14 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel>
-            <NavLink
+            <NavLink to={"inventory-overview"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Products
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel>
-            <NavLink
+            <NavLink to={"adding-product"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Add Products

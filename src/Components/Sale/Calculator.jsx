@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Calculator = () => {
   return (
@@ -38,7 +39,7 @@ const Calculator = () => {
           </tr>
           <tr>
             <td className="py-2 px-2 text-center" colSpan={4}>
-              <button>payment</button>
+              <NavLink to={"/sale-checkout"} ><button>payment</button></NavLink>
             </td>
           </tr>
         </thead>

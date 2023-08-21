@@ -18,6 +18,7 @@ import MyAccount from "../Pages/Profile/MyAccount";
 import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
 import BannedUser from "../Pages/user/BannedUser";
+import Checkout from "../Pages/Sale/Checkout";
 
 export default function Path() {
   return (
@@ -45,6 +46,7 @@ export default function Path() {
           <Route path="adding-product" element={<AddProduct/>}/>
         </Route>
         <Route path="sale-cashier" element={<Cashier/>}/>
+        <Route path="/sale-checkout" element={<Checkout/>}/>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
         <Route path="/*" element={<Error/>}/>
       </Routes>

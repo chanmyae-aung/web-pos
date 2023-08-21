@@ -79,7 +79,7 @@ const Cashier = () => {
 
 
    <div className=" border-l mt-12   w-1/3">
-    <Reciept/>
+    <Reciept calculator={true} printBtn={false} />
    </div>
      
     </div>
