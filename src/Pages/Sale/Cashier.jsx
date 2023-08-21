@@ -1,6 +1,6 @@
 import React from "react";
 import { Breadcrumbs, Link } from "@mui/material";
-import SaleCard from "../../Components/Sidebar/SaleCard";
+import SaleCard from "../../Components/Sale/SaleCard";
 import NavBar from "../../Components/Sidebar/NavBar";
 import Reciept from "../../Components/Sale/Reciept";
 
@@ -8,7 +8,7 @@ const Cashier = () => {
   return (
     <>
      <NavBar/>
-    <div className=" flex gap-2 bg-[#161618]">
+    <div className=" flex gap-2 bg-[#202124]">
        
    <div className=" w-2/3 mt-14 px-5">
      {/* sale breadcrumb */}
@@ -63,11 +63,11 @@ const Cashier = () => {
         <SaleCard/>
         <SaleCard/>
         <SaleCard/>
-        <SaleCard/><SaleCard/>
         <SaleCard/>
         <SaleCard/>
-        <SaleCard/><SaleCard/>
-        <SaleCard/><SaleCard/>
+        <SaleCard/>
+        <SaleCard/>
+        <SaleCard/>
         <SaleCard/>
         
        
@@ -78,7 +78,7 @@ const Cashier = () => {
    </div>
 
 
-   <div className=" border-l mt-14 px-5 w-1/3">
+   <div className=" border-l mt-12   w-1/3">
     <Reciept/>
    </div>
      
