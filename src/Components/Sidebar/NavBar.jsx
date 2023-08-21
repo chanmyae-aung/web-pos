@@ -5,7 +5,7 @@ import { MdOutlineNightlight } from "react-icons/md";
 
 const NavBar = () => {
   return (
-    <nav className=" bg-[#3F4245] z-50 py-2 px-2 fixed w-full">
+    <nav className=" bg-[#3F4245] print:hidden z-50 py-2 px-2 fixed w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
         <a href="#" className="flex items-center">
           <span className="self-center text-2xl text-[#f5f5f5] border-none font-semibold tracking-wider ">
