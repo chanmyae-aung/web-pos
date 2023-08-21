@@ -1,13 +1,13 @@
 import React from 'react'
 import { BiChevronDown } from 'react-icons/bi';
 
-export default function StepTwo({toggleSelect, display, setDisplay, select}) {
+export default function StepTwo({toggleSelect, display, setDisplay, select , editProfile}) {
   return (
     <div>
         <section
               className={`flex flex-col gap-5 bg-[#161618] p-10 w-full`}
             >
-              <div className={`flex`}>
+              {!editProfile && <div className={`flex`}>
                 <label className="block mb-2 w-[30%]" htmlFor="">
                   Position
                 </label>
@@ -46,7 +46,7 @@ export default function StepTwo({toggleSelect, display, setDisplay, select}) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>}
               <div className="flex">
                 <label className="w-[30%]">Email</label>
                 <input
@@ -57,7 +57,7 @@ export default function StepTwo({toggleSelect, display, setDisplay, select}) {
                   id=""
                 />
               </div>
-              <div className="flex">
+              {!editProfile && <div className="flex">
                 <label className="w-[30%]">Password</label>
                 <input
                   placeholder="......."
@@ -66,8 +66,8 @@ export default function StepTwo({toggleSelect, display, setDisplay, select}) {
                   name=""
                   id=""
                 />
-              </div>
-              <div className="flex">
+              </div>}
+              {!editProfile && <div className="flex">
                 <label className="w-[30%]">Confirm Password</label>
                 <input
                   placeholder="........"
@@ -76,7 +76,7 @@ export default function StepTwo({toggleSelect, display, setDisplay, select}) {
                   name=""
                   id=""
                 />
-              </div>
+              </div>}
             </section>
     </div>
   )
