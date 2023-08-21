@@ -17,6 +17,7 @@ import Cashier from "../Pages/Sale/Cashier";
 import MyAccount from "../Pages/Profile/MyAccount";
 import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
+import BannedUser from "../Pages/user/BannedUser";
 
 export default function Path() {
   return (
@@ -34,6 +35,7 @@ export default function Path() {
           <Route path="my-account" element={<MyAccount />} />
           <Route path="edit-profile" element={<EditProfile />} />
           <Route path="user-overview" element={<UserList />} />
+          <Route path="banned-user" element={<BannedUser />} />
           <Route path="user-detail" element={<UserDetail />} />
           <Route path="create-user" element={<CreateUser />} />
           <Route path="update-user" element={<UpdateUser />} />
