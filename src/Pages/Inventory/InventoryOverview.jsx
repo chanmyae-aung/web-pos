@@ -5,6 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button, Group,useMantineTheme } from '@mantine/core';
 
+
 import {
   AiOutlineOrderedList,
   AiFillEdit,
@@ -187,7 +188,7 @@ const InventoryOverview = () => {
 
   return (
     <div>
-             <Modal opened={opened} onClose={close} title="Add Stock">
+             <Modal className=" mdbox" opened={opened} onClose={close} title="Add Stock">
        
         <NumberInput
         defaultValue={0}

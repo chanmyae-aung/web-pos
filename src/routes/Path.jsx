@@ -16,6 +16,7 @@ import InventoryOverview from "../Pages/Inventory/InventoryOverview";
 import Cashier from "../Pages/Sale/Cashier";
 import MyAccount from "../Pages/Profile/MyAccount";
 import EditProfile from "../Pages/Profile/EditProfile";
+import AddProduct from "../Pages/Inventory/AddProduct";
 
 export default function Path() {
   return (
@@ -39,6 +40,7 @@ export default function Path() {
           <Route path="media-gallery" element={<Mediapgwpic />} />
           <Route path="sale-recent" element={<Recent/>}/>
           <Route path="inventory-overview" element={<InventoryOverview/>}/>
+          <Route path="adding-product" element={<AddProduct/>}/>
         </Route>
         <Route path="sale-cashier" element={<Cashier/>}/>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
