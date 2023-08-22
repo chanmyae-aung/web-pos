@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button";
-import { BiChevronDown } from "react-icons/bi";
-import { MdOutlineEdit } from "react-icons/md";
-import { Typography } from "@mui/material";
-import { Breadcrumbs } from "@mantine/core";
-import { Link } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb";
 import StepThree from "../../Components/User/StepThree";
 import StepTwo from "../../Components/User/StepTwo";
@@ -12,11 +7,15 @@ import StepOne from "../../Components/User/StepOne";
 import UserRef from "../../Components/User/UserRef";
 import Cookies from "js-cookie";
 import { useCreateUserMutation } from "../../Feature/API/userApi";
+import SelectPhotoModal from "../../Components/SelectPhotoModal";
 
 export default function CreateUser() {
   const token = Cookies.get("token");
+  const [show, setShow] = useState(false)
+  const toggleShow = () => {
+    setShow(!show)
+  }
   const [create] = useCreateUserMutation();
-  const editImage = document.querySelector(".file");
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -54,8 +53,9 @@ export default function CreateUser() {
   const handleCreateUser = (e) => {
     e.preventDefault();
   };
+
   return (
-    <>
+    <div>
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
@@ -68,6 +68,9 @@ export default function CreateUser() {
       </div>
       {/* path breadcrumbs */}
 
+      <div className={`${show ? "scale-y-1" : "scale-y-0" } transition-all duration-400 origin-center absolute z-20 items-center bg-[#202124] justify-center`}>
+        <SelectPhotoModal setShow={setShow} toggleShow={toggleShow}/>
+      </div>
       <main className="mt-7">
         <form action="" className={`flex gap-10`}>
           {/* Personal Info */}
@@ -90,7 +93,7 @@ export default function CreateUser() {
           {/* Photo Upload  */}
           {state.stepThree && (
             <div className="w-[70%]">
-              <StepThree />
+              <StepThree toggleShow={toggleShow}/>
             </div>
           )}
           {/* Create Step  */}
@@ -150,6 +153,6 @@ export default function CreateUser() {
           </section>
         </form>
       </main>
-    </>
+    </div>
   );
 }

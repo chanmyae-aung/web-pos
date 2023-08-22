@@ -15,6 +15,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiCopyDuotone } from "react-icons/pi";
 import { IoMdAdd } from "react-icons/io";
+import { Link, NavLink } from "react-router-dom";
 
 const InventoryOverview = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -213,9 +214,11 @@ const InventoryOverview = () => {
           <button className=" hover:border-blue-300 hover:text-white mx-8 px-6 py-2   font-bold  border  border-white rounded-sm text-blue-300 ">
             Go to shop
           </button>
-          <button className=" hover:opacity-80 px-6 py-2   font-bold  border  rounded-sm text-black bg-blue-300 ">
+         <Link  >
+         <button className=" hover:opacity-80 px-6 py-2   font-bold  border  rounded-sm text-black bg-blue-300 ">
             + Add Product
           </button>
+         </Link>
         </div>
       </div>
       <div>
