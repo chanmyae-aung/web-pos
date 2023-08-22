@@ -1,13 +1,16 @@
 import React from 'react'
 import { BiChevronDown } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
+import { addConfirmPass, addEmail, addPassword } from '../../Feature/Service/userSlice';
 
-export default function StepTwo({toggleSelect, display, setDisplay, select , editProfile}) {
+export default function StepTwo({toggleSelect, display, setDisplay, select, editUser}) {
+  const dispatch = useDispatch()
   return (
     <div>
         <section
               className={`flex flex-col gap-5 bg-[#161618] p-10 w-full`}
             >
-              {!editProfile && <div className={`flex`}>
+              {!editUser && <div className={`flex`}>
                 <label className="block mb-2 w-[30%]" htmlFor="">
                   Position
                 </label>
@@ -47,32 +50,37 @@ export default function StepTwo({toggleSelect, display, setDisplay, select , edi
                   </div>
                 </div>
               </div>}
-              <div className="flex">
+              {
+                !editUser && <div className="flex">
                 <label className="w-[30%]">Email</label>
                 <input
+                onChange={(e) => dispatch(addEmail({email: e.target.value}))}
                   placeholder="Enter your email"
                   className={`w-[70%] outline-none border rounded px-5 py-2`}
-                  type="phone"
+                  type="email"
                   name=""
                   id=""
                 />
               </div>
-              {!editProfile && <div className="flex">
+              }
+              { <div className="flex">
                 <label className="w-[30%]">Password</label>
                 <input
-                  placeholder="......."
+                onChange={(e) => dispatch(addPassword({password: e.target.value}))}
+                  placeholder="Enter your password"
                   className={`w-[70%] outline-none border rounded px-5 py-2`}
-                  type="phone"
+                  type="password"
                   name=""
                   id=""
                 />
               </div>}
-              {!editProfile && <div className="flex">
+              {<div className="flex">
                 <label className="w-[30%]">Confirm Password</label>
                 <input
-                  placeholder="........"
+                onChange={(e) => dispatch(addConfirmPass({password_confirmation: e.target.value}))}
+                  placeholder="Confirm your password"
                   className={`w-[70%] outline-none border rounded px-5 py-2`}
-                  type="phone"
+                  type="password"
                   name=""
                   id=""
                 />

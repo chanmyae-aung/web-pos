@@ -209,7 +209,7 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel className="px-2 py-0  text-[1rem]">
-            <NavLink to={"/edit-profile"}
+            <NavLink to={"/edit-user"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }

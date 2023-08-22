@@ -5,7 +5,7 @@ import Dashboard from "../Pages/Dashboard";
 import UserList from "../Pages/user/UserList";
 import UserDetail from "../Pages/user/UserDetail";
 import CreateUser from "../Pages/user/CreateUser";
-import UpdateUser from "../Pages/user/UpdateUser";
+import UpdateUser from "../Pages/user/EditUser";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
 import Mediapgwpic from "../Pages/Media/Mediapgwpic";
@@ -15,10 +15,10 @@ import Recent from "../Pages/Sale/Recent";
 import InventoryOverview from "../Pages/Inventory/InventoryOverview";
 import Cashier from "../Pages/Sale/Cashier";
 import MyAccount from "../Pages/Profile/MyAccount";
-import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
 import BannedUser from "../Pages/user/BannedUser";
 import Checkout from "../Pages/Sale/Checkout";
+import EditUser from "../Pages/user/EditUser";
 import ProductDetail from "../Pages/Inventory/ProductDetail";
 import ProductEditing from "../Pages/Inventory/ProductEditing";
 
@@ -37,7 +37,7 @@ export default function Path() {
         >
           <Route index element={<Dashboard />} />
           <Route path="my-account" element={<MyAccount />} />
-          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="edit-user" element={<EditUser />} />
           <Route path="user-overview" element={<UserList />} />
           <Route path="banned-user" element={<BannedUser />} />
           <Route path="user-detail" element={<UserDetail />} />

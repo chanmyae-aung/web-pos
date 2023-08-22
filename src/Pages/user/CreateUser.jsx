@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button";
-import { BiChevronDown } from "react-icons/bi";
-import { MdOutlineEdit } from "react-icons/md";
-import { Typography } from "@mui/material";
-import { Breadcrumbs } from "@mantine/core";
-import { Link } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb";
 import StepThree from "../../Components/User/StepThree";
 import StepTwo from "../../Components/User/StepTwo";
 import StepOne from "../../Components/User/StepOne";
 import UserRef from "../../Components/User/UserRef";
+import Cookies from "js-cookie";
+import { useCreateUserMutation } from "../../Feature/API/userApi";
+import SelectPhotoModal from "../../Components/SelectPhotoModal";
 
 export default function CreateUser() {
-  const editImage = document.querySelector(".file");
-  const [userData, setUserData] = useState({});
+  const token = Cookies.get("token");
+  const [show, setShow] = useState(false)
+  const toggleShow = () => {
+    setShow(!show)
+  }
+  const [create] = useCreateUserMutation();
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -41,15 +43,19 @@ export default function CreateUser() {
       stepTwo: false,
       createStep: true,
     });
-  }
+  };
   console.log(state);
   const [select, setSelect] = useState(false);
   const [display, setDisplay] = useState("Admin");
   const toggleSelect = () => {
     setSelect(!select);
   };
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <>
+    <div>
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
@@ -62,32 +68,40 @@ export default function CreateUser() {
       </div>
       {/* path breadcrumbs */}
 
+      <div className={`${show ? "scale-y-1" : "scale-y-0" } transition-all duration-400 origin-center absolute z-20 items-center bg-[#202124] justify-center`}>
+        <SelectPhotoModal setShow={setShow} toggleShow={toggleShow}/>
+      </div>
       <main className="mt-7">
         <form action="" className={`flex gap-10`}>
           {/* Personal Info */}
           {state.stepOne && (
             <div className="w-[70%]">
-            <StepOne />
-          </div>
+              <StepOne />
+            </div>
           )}
           {/* Login Info  */}
           {state.stepTwo && (
             <div className="w-[70%]">
-            <StepTwo select={select} toggleSelect={toggleSelect} display={display} setDisplay={setDisplay}/>
-          </div>
+              <StepTwo
+                select={select}
+                toggleSelect={toggleSelect}
+                display={display}
+                setDisplay={setDisplay}
+              />
+            </div>
           )}
           {/* Photo Upload  */}
           {state.stepThree && (
             <div className="w-[70%]">
-              <StepThree />
+              <StepThree toggleShow={toggleShow}/>
             </div>
           )}
           {/* Create Step  */}
-          {
-            state.createStep && <div className="w-[70%]">
-            <UserRef />
-          </div>
-          }
+          {state.createStep && (
+            <div className="w-[70%]">
+              <UserRef />
+            </div>
+          )}
           {/* Step Indicator  */}
           <section className={`w-[30%] flex flex-col justify-center`}>
             <div className="flex items-center gap-3 my-3">
@@ -139,6 +153,6 @@ export default function CreateUser() {
           </section>
         </form>
       </main>
-    </>
+    </div>
   );
 }
