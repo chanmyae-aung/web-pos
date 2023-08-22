@@ -70,7 +70,7 @@ const Login = () => {
         const user={email,password};
         const {data}=await login(user);
         console.log(data);
-        dispatch(addUser({user:data?.user.email,token:data?.token}));
+        dispatch(addUser({user:data?.user?.email,token:data?.token}));
         if (data?.message ==="Login successfully"){
             nav("/")
         }
