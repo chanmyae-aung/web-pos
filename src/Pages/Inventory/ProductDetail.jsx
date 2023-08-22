@@ -1,13 +1,62 @@
-import React from "react";
-
+import React from 'react'
 import { MdOutlineEdit } from "react-icons/md";
-
+import { TbMailOpenedFilled } from "react-icons/tb";
+import { FaPhoneVolume } from "react-icons/fa";
 import { BiSolidUser } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-const ProductRef = () => {
-  const editImage = document.querySelector(".file");
+import { Table } from '@mantine/core';
+import Pagination from '../../Components/Pagination';
+
+const ProductDetail = () => {
+    const editImage = document.querySelector(".file");
+    const elements = [
+        {
+          No: 1,
+          name: "abcd",
+          account: "123",
+          date: "-",
+       
+        },
+        {
+          No: 2,
+          name: "efgh",
+          account: "345",
+          date: "-",
+         
+        },
+        {
+          No: 3,
+          name: "ijkl",
+          account: "569",
+          date: "-",
+        
+        },
+        {
+          No: 4,
+          name: "mnop",
+          account: "mn",
+          date: "-",
+         
+        },
+        {
+          No: 5,
+          name: "qrst",
+          account: "qr",
+          date: "-",
+         
+        },
+      ];
+      const rows = elements.map((element) => (
+        <tr key={element.No}>
+          <td className=" text-white">{element.No}</td>
+          <td className=" text-white">{element.name}</td>
+          <td className=" text-white">{element.account}</td>
+          <td className=" text-white">{element.date}</td>
+         
+        </tr>
+      ));
   return (
-    <div className={`w-full`}>
+    <div className={`w-full flex justify-around items-center`}>
       <main className={`flex items-center mt-24`}>
         <section className={`w-full h-[70%] p-1`}>
           <div className={`w-full relative p-8 bg-[#171717]`}>
@@ -71,8 +120,45 @@ const ProductRef = () => {
           </div>
         </section>
       </main>
+    <div className=' flex-col'>
+    <div className=' m-2 p-6 bg-[#171717]'>
+     <p>STOCK HISTORY</p>
+      <Table>
+            <thead>
+              <tr>
+                <th className=" text-gray-300">NO</th>
+                <th className=" text-gray-300">USER NAME</th>
+                <th className=" text-gray-300">ADDED QUANTITY </th>
+                <th className=" text-gray-300">CREATED AT</th>
+               
+                
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </Table>
+          
+      </div>
+      <Pagination currentPage={'1'} last_page={'5'}/>
+      <div className=' m-2 p-6 bg-[#171717]'>
+     <p>SALE HISTORY</p>
+      <Table>
+            <thead>
+              <tr>
+                <th className=" text-gray-300">NO</th>
+                <th className=" text-gray-300">USER NAME</th>
+                <th className=" text-gray-300">ADDED QUANTITY </th>
+                <th className=" text-gray-300">CREATED AT</th>
+               
+                
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </Table>
+      </div>
+      <Pagination currentPage={'1'} last_page={'5'}/>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default ProductRef;
+export default ProductDetail
