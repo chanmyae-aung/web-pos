@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Button from '../Button'
 import { MdOutlineEdit } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { addPhoto } from '../../Feature/Service/userSlice'
 
-export default function StepThree() {
-    const editImage = document.querySelector(".file")
+export default function StepThree({setUserData}) {
+  const dispatch = useDispatch()
+  const fileInputRef = useRef(null);
+
+  const uploadPhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
   return (
     <div>
         <section
@@ -20,11 +29,11 @@ export default function StepThree() {
                     alt=""
                   />
                   <div
-                    onClick={() => editImage.click()}
+                    onClick={uploadPhoto}
                     className={`flex justify-center cursor-pointer absolute bg-[#202124] right-3  bottom-1 items-center text-xs gap-1 border-2 rounded-full w-8 h-8 px-1 py-0.5`}
                   >
                     <MdOutlineEdit />
-                    <input className="file hidden" type="file" name="" id="" />
+                    <input ref={fileInputRef} onChange={(e) => e.target.files && dispatch(addPhoto({user_photo: e.target.files[0]}))} className="file hidden" type="file" name="" id="" />
                   </div>
                 </div>
                 <div className="my-10">

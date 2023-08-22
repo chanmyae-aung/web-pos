@@ -14,7 +14,17 @@ export const userApi = createApi({
       }),
       providesTags: ["userApi"],
     }),
+    createUser: builder.mutation({
+      query: ({ token, userData }) => ({
+        url: "/register",
+        body: userData,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ["userApi"],
+    }),
   }),
 });
 
-export const {useGetAllUsersQuery} = userApi;
+export const { useGetAllUsersQuery, useCreateUserMutation } = userApi;

@@ -10,10 +10,13 @@ import StepThree from "../../Components/User/StepThree";
 import StepTwo from "../../Components/User/StepTwo";
 import StepOne from "../../Components/User/StepOne";
 import UserRef from "../../Components/User/UserRef";
+import Cookies from "js-cookie";
+import { useCreateUserMutation } from "../../Feature/API/userApi";
 
 export default function CreateUser() {
+  const token = Cookies.get("token");
+  const [create] = useCreateUserMutation();
   const editImage = document.querySelector(".file");
-  const [userData, setUserData] = useState({});
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -41,12 +44,15 @@ export default function CreateUser() {
       stepTwo: false,
       createStep: true,
     });
-  }
+  };
   console.log(state);
   const [select, setSelect] = useState(false);
   const [display, setDisplay] = useState("Admin");
   const toggleSelect = () => {
     setSelect(!select);
+  };
+  const handleCreateUser = (e) => {
+    e.preventDefault();
   };
   return (
     <>
@@ -67,14 +73,19 @@ export default function CreateUser() {
           {/* Personal Info */}
           {state.stepOne && (
             <div className="w-[70%]">
-            <StepOne />
-          </div>
+              <StepOne />
+            </div>
           )}
           {/* Login Info  */}
           {state.stepTwo && (
             <div className="w-[70%]">
-            <StepTwo select={select} toggleSelect={toggleSelect} display={display} setDisplay={setDisplay}/>
-          </div>
+              <StepTwo
+                select={select}
+                toggleSelect={toggleSelect}
+                display={display}
+                setDisplay={setDisplay}
+              />
+            </div>
           )}
           {/* Photo Upload  */}
           {state.stepThree && (
@@ -83,11 +94,11 @@ export default function CreateUser() {
             </div>
           )}
           {/* Create Step  */}
-          {
-            state.createStep && <div className="w-[70%]">
-            <UserRef />
-          </div>
-          }
+          {state.createStep && (
+            <div className="w-[70%]">
+              <UserRef />
+            </div>
+          )}
           {/* Step Indicator  */}
           <section className={`w-[30%] flex flex-col justify-center`}>
             <div className="flex items-center gap-3 my-3">
