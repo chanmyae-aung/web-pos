@@ -19,6 +19,9 @@ import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
 import BannedUser from "../Pages/user/BannedUser";
 import Checkout from "../Pages/Sale/Checkout";
+import ProductDetail from "../Pages/Inventory/ProductDetail";
+import ProductEditing from "../Pages/Inventory/ProductEditing";
+
 
 export default function Path() {
   return (
@@ -44,6 +47,9 @@ export default function Path() {
           <Route path="sale-recent" element={<Recent/>}/>
           <Route path="inventory-overview" element={<InventoryOverview/>}/>
           <Route path="adding-product" element={<AddProduct/>}/>
+          <Route path="product-detail" element={<ProductDetail/>}/>
+          <Route path="product-editing" element={<ProductEditing/>}/>
+        
         </Route>
         <Route path="sale-cashier" element={<Cashier/>}/>
         <Route path="/sale-checkout" element={<Checkout/>}/>
