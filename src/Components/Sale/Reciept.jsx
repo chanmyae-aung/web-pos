@@ -85,7 +85,7 @@ const Reciept = ({ calculator, printBtn }) => {
        <span className="text-sm font-thin">Tax : 5000</span>
        </div>}
       {/* Print Button */}
-      {printBtn && <button onClick={printHandler} className="mt-5 px-2 py-1 rounded self-center bg-black">Print</button>}
+      {printBtn && <button onClick={printHandler} className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black">Print</button>}
      </div>
     </div>
   );
