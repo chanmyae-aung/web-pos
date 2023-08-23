@@ -1,4 +1,6 @@
 import { Group } from "@mantine/core";
+import { useGetMediaQuery } from '../../Feature/API/mediaSlice';
+
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import {
   AiOutlineClose,
@@ -12,6 +14,8 @@ import { Table } from "@mantine/core";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiCopyDuotone } from "react-icons/pi";
 import Breadcrumb from "../../Components/Breadcrumb";
+import { useUploadMediaMutation } from "../../Feature/API/mediaSlice";
+import Cookies from "js-cookie";
 const elements = [
   {
     No: 1,
@@ -84,6 +88,7 @@ const elements = [
     ),
   },
 ];
+
 const ExpandedImageView = ({ image, onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80">
     <div className="max-w-3xl mx-auto p-4">
@@ -109,39 +114,70 @@ const rows = elements.map((element) => (
   </tr>
 ));
 
-const images = [
-  {
-    id: 1,
-    link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 2,
-    link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 3,
-    link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 4,
-    link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 5,
-    link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 6,
-    link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-];
+// const images = [
+//   {
+//     id: 1,
+//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 2,
+//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 3,
+//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 4,
+//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 5,
+//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 6,
+//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+// ];
 
 const Mediapgwpic = (props) => {
+  const token=Cookies.get('token');
+  const [uploadMedia]=useUploadMediaMutation();
+  const { data: mediaData, isLoading, isError } = useGetMediaQuery();
+  const media = mediaData || [];
   const [expandedImageId, setExpandedImageId] = useState(null);
   const [displayState, setDisplayState] = useState(false);
   const [displayState2, setDisplayState2] = useState(false);
-  console.log(displayState);
-
+  const handleDropzoneUpload = async (acceptedFiles) => {
+    try {
+      // Collect selected files in an array
+     console.log(acceptedFiles);
+     const photos=new FormData();
+     for(let i=0;i<acceptedFiles.length;i++){
+      photos.append('photos[]',acceptedFiles[i],acceptedFiles[i].name)
+     }
+       for (const  value of photos.entries()) {
+        console.log(value);
+        console.log(token);
+        
+       }
+      // Use the mutation hook to upload the array of files
+      const result = await uploadMedia({photos,token});
+  
+      if (result.error) {
+        // Handle any errors here
+        console.error('Error uploading files:', result.error);
+      } else {
+        // Handle success, e.g., update your component state
+        console.log('Files uploaded successfully:', result.data);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+  const images =mediaData?.data;
+console.log(images);
   return (
     <div className="  ">
       <div className=" p-10">
@@ -153,8 +189,8 @@ const Mediapgwpic = (props) => {
         />
         <Dropzone
           className=" mt-6 mb-10 bg-softblack  hover:bg-softblack border border-solid"
-          onDrop={(files) => console.log("accepted files", files)}
-          onReject={(files) => console.log("rejected files", files)}
+          onDrop={handleDropzoneUpload} // Call the upload function here
+          onReject={(files) => console.log('rejected files', files)}
           maxSize={3 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
           {...props}
@@ -207,11 +243,12 @@ const Mediapgwpic = (props) => {
             displayState ? "flex" : "hidden"
           }   my-6 overflow-y-auto  flex-wrap  justify-center gap-10 items-center`}
         >
-          {images.map((i) => {
+          {images?.map((i) => {
+            console.log(i.url);
             return (
               <img
                 key={i.id}
-                src={i.link}
+                src={i.url}
                 className=" cursor-pointer  hover:opacity-80  rounded-2xl w-[300px] h-[200px]"
                 onClick={() =>
                   setExpandedImageId(i.id === expandedImageId ? null : i.id)

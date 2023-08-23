@@ -3,6 +3,7 @@ import { authApi } from "../API/authApi";
 import authSlice from "./authSlice";
 import { userApi } from "../API/userApi";
 import userSlice from "./userSlice";
+import { api } from '../API/mediaSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,8 @@ export const store = configureStore({
     authSlice: authSlice,
     [userApi.reducerPath]: userApi.reducer,
     userSlice: userSlice,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware),
 });
