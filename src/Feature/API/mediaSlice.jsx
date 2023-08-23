@@ -1,12 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import Cookies from 'js-cookie';
+
+// Get the token from the cookie
+const token = Cookies.get('token');
 
 export const api = createApi({
   reducerPath:'mediaSlice',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://b.mmsdev.site/api/v1' }), 
-  tagTypes:["mediaSlice"],// Your API base URL here
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://b.mmsdev.site/api/v1' , prepareHeaders: (headers) => {
+    // Include the token in the headers if it exists
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return headers;
+  },}), 
+  
+  provideTags:["mediaSlice"],
   endpoints: (builder) => ({
     getMedia: builder.query({
-      query: () => 'media', // The endpoint for fetching media data
+      query: () => 'media',
     }),
     uploadMedia: builder.mutation({
       query: ({photos,token}) => ({
@@ -18,6 +30,7 @@ export const api = createApi({
       }),
       invalidatesTags:["mediaSlice"]
     }),
+    
   }),
 });
 

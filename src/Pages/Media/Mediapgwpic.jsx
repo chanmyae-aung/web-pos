@@ -1,4 +1,6 @@
 import { Group } from "@mantine/core";
+import { useGetMediaQuery } from '../../Feature/API/mediaSlice';
+
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import {
   AiOutlineClose,
@@ -112,36 +114,38 @@ const rows = elements.map((element) => (
   </tr>
 ));
 
-const images = [
-  {
-    id: 1,
-    link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 2,
-    link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 3,
-    link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 4,
-    link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 5,
-    link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    id: 6,
-    link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-  },
-];
+// const images = [
+//   {
+//     id: 1,
+//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 2,
+//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 3,
+//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 4,
+//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 5,
+//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+//   {
+//     id: 6,
+//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+//   },
+// ];
 
 const Mediapgwpic = (props) => {
   const token=Cookies.get('token');
   const [uploadMedia]=useUploadMediaMutation();
+  const { data: mediaData, isLoading, isError } = useGetMediaQuery();
+  const media = mediaData || [];
   const [expandedImageId, setExpandedImageId] = useState(null);
   const [displayState, setDisplayState] = useState(false);
   const [displayState2, setDisplayState2] = useState(false);
@@ -172,7 +176,8 @@ const Mediapgwpic = (props) => {
       console.error('An error occurred:', error);
     }
   };
-
+  const images =mediaData?.data;
+console.log(images);
   return (
     <div className="  ">
       <div className=" p-10">
@@ -238,11 +243,12 @@ const Mediapgwpic = (props) => {
             displayState ? "flex" : "hidden"
           }   my-6 overflow-y-auto  flex-wrap  justify-center gap-10 items-center`}
         >
-          {images.map((i) => {
+          {images?.map((i) => {
+            console.log(i.url);
             return (
               <img
                 key={i.id}
-                src={i.link}
+                src={i.url}
                 className=" cursor-pointer  hover:opacity-80  rounded-2xl w-[300px] h-[200px]"
                 onClick={() =>
                   setExpandedImageId(i.id === expandedImageId ? null : i.id)
