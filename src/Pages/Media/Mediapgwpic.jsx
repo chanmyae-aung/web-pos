@@ -12,6 +12,8 @@ import { Table } from "@mantine/core";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiCopyDuotone } from "react-icons/pi";
 import Breadcrumb from "../../Components/Breadcrumb";
+import { useUploadMediaMutation } from "../../Feature/API/mediaSlice";
+import Cookies from "js-cookie";
 const elements = [
   {
     No: 1,
@@ -84,6 +86,7 @@ const elements = [
     ),
   },
 ];
+
 const ExpandedImageView = ({ image, onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80">
     <div className="max-w-3xl mx-auto p-4">
@@ -137,10 +140,38 @@ const images = [
 ];
 
 const Mediapgwpic = (props) => {
+  const token=Cookies.get('token');
+  const [uploadMedia]=useUploadMediaMutation();
   const [expandedImageId, setExpandedImageId] = useState(null);
   const [displayState, setDisplayState] = useState(false);
   const [displayState2, setDisplayState2] = useState(false);
-  console.log(displayState);
+  const handleDropzoneUpload = async (acceptedFiles) => {
+    try {
+      // Collect selected files in an array
+     console.log(acceptedFiles);
+     const photos=new FormData();
+     for(let i=0;i<acceptedFiles.length;i++){
+      photos.append('photos[]',acceptedFiles[i],acceptedFiles[i].name)
+     }
+       for (const  value of photos.entries()) {
+        console.log(value);
+        console.log(token);
+        
+       }
+      // Use the mutation hook to upload the array of files
+      const result = await uploadMedia({photos,token});
+  
+      if (result.error) {
+        // Handle any errors here
+        console.error('Error uploading files:', result.error);
+      } else {
+        // Handle success, e.g., update your component state
+        console.log('Files uploaded successfully:', result.data);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
     <div className="  ">
@@ -153,8 +184,8 @@ const Mediapgwpic = (props) => {
         />
         <Dropzone
           className=" mt-6 mb-10 bg-softblack  hover:bg-softblack border border-solid"
-          onDrop={(files) => console.log("accepted files", files)}
-          onReject={(files) => console.log("rejected files", files)}
+          onDrop={handleDropzoneUpload} // Call the upload function here
+          onReject={(files) => console.log('rejected files', files)}
           maxSize={3 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
           {...props}
