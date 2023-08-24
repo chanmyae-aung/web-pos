@@ -6,7 +6,8 @@ import { Button, Typography } from "@mui/material";
 import { BsCashCoin, BsCreditCard, BsCreditCard2Back } from "react-icons/bs";
 import { HiArrowSmLeft } from "react-icons/hi";
 
-const Checkout = ({ calculator, printBtn }) => {
+const Checkout = ({ calculator, printBtn,cardAdd,setCardAdd }) => {
+
   return (
     <>
       <NavBar />
@@ -57,7 +58,7 @@ const Checkout = ({ calculator, printBtn }) => {
         </div>
 
         <div className=" border-l mt-12 vendorListHeading print:bg-black   w-1/3">
-          <Reciept calculator={false} printBtn={true} />
+          <Reciept calculator={false} printBtn={true} cardAdd={cardAdd} setCardAdd={setCardAdd} />
         </div>
       </div>
     </>
