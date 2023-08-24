@@ -7,13 +7,13 @@ const Reciept = ({ calculator, printBtn }) => {
     window.print();
   };
   return (
-    <div className="text-[#f5f5f5] h-screen   ">
+    <div className="text-[#f5f5f5] bg-[#161618] h-screen   ">
       <div className="flex flex-col h-full">
         <div
           className={`${
             printBtn == true
-              ? `h-full overflow-scroll`
-              : `h-[50%]  overflow-scroll overflow-x-hidden`
+              ? `h-full overflow-scroll bg-[#161618]`
+              : `h-[50%]  overflow-scroll overflow-x-hidden bg-[#161618]`
           }`}
         >
           <Typography

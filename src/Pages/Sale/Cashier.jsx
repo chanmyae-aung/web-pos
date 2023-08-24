@@ -12,7 +12,7 @@ const Cashier = () => {
         <div className="flex gap-2">
           {/* receipt section 1 (bought product list) */}
 
-          <div className="w-[65%]  h-full px-2 pt-3 ">
+          <div className="w-[70%]  h-full px-2 pt-3 ">
             <Breadcrumbs aria-label="breadcrumb" style={{ color: "#f5f5f5" }}>
               <Link
                 sx={{ fontSize: "1rem" }}
@@ -69,7 +69,7 @@ const Cashier = () => {
           </div>
 
           {/* reciept section 2 (calculator) */}
-          <div className="w-[35%] h-full border-l">
+          <div className="w-[30%] h-full border-l border-[#3f4245]">
             <Reciept calculator={true} printBtn={false} />
           </div>
         </div>
