@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 // Get the token from the cookie
 const token = Cookies.get('token');
 
+
 export const api = createApi({
   reducerPath:'mediaSlice',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://b.mmsdev.site/api/v1' , prepareHeaders: (headers) => {
@@ -30,8 +31,18 @@ export const api = createApi({
       }),
       invalidatesTags:["mediaSlice"]
     }),
+  deleteMedia:builder.mutation({
+    query:({id,token})=>({
+     
+      url: `media/${id}`,
+      method:"DELETE",
+     
+      headers:{authorization:`Bearer ${token}`}
+    }),
+    invalidatesTags:['mediaSlice']
+  })
     
   }),
 });
 
-export const { useGetMediaQuery, useUploadMediaMutation } = api;
+export const { useDeleteMediaMutation, useGetMediaQuery, useUploadMediaMutation  } = api;
