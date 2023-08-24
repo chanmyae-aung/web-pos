@@ -71,14 +71,14 @@ const Login = () => {
       console.log(data);
       dispatch(addUser({ user: data?.user?.email, token: data?.token }));
 
-      if (data === undefined) {
+      if (data == undefined) {
         toast.error("Please enter a valid email !", {
           position: toast.POSITION.BOTTOM_CENTER,
           autoClose: 2000,
           hideProgressBar: true,
           theme: "dark",
         });
-        nav("/login");
+        //nav("/login");
       } else {
         if (data?.message === "Login successfully") {
           toast.success("Login Successfully !", {
