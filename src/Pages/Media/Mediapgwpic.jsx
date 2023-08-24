@@ -16,78 +16,8 @@ import { PiCopyDuotone } from "react-icons/pi";
 import Breadcrumb from "../../Components/Breadcrumb";
 import { useUploadMediaMutation } from "../../Feature/API/mediaSlice";
 import Cookies from "js-cookie";
-const elements = [
-  {
-    No: 1,
-    name: "thurein zaw",
-    account: "C0123",
-    date: "12/7/2023",
-    time: "10:00 a.m",
-    filesize: "20.0mb",
-    action: (
-      <div className="  flex">
-        <RiDeleteBin5Line className=" cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone className="cursor-pointer hover:text-blue-700" />
-      </div>
-    ),
-  },
-  {
-    No: 2,
-    name: "htetarkar zaw",
-    account: "C678",
-    date: "16/7/2023",
-    time: "12:00 a.m",
-    filesize: "20.0mb",
-    action: (
-      <div className=" flex">
-        <RiDeleteBin5Line className=" cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone className="cursor-pointer hover:text-blue-700" />
-      </div>
-    ),
-  },
-  {
-    No: 3,
-    name: "Min arkar zaw",
-    account: "C7896",
-    date: "18/72023",
-    time: "1:00 a.m",
-    filesize: "20.0mb",
-    action: (
-      <div className=" flex">
-        <RiDeleteBin5Line className=" cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone className="cursor-pointer hover:text-blue-700" />
-      </div>
-    ),
-  },
-  {
-    No: 4,
-    name: "htet nadi",
-    account: "C5676",
-    date: "1/72023",
-    time: "10:00 p.m",
-    filesize: "20.0mb",
-    action: (
-      <div className=" flex">
-        <RiDeleteBin5Line className=" cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone className="cursor-pointer hover:text-blue-700" />
-      </div>
-    ),
-  },
-  {
-    No: 5,
-    name: "Wai yan zaw",
-    account: "C2345",
-    date: "5/7/2023",
-    time: "1:00 a.m",
-    filesize: "20.0mb",
-    action: (
-      <div className=" flex">
-        <RiDeleteBin5Line className=" cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone className="cursor-pointer hover:text-blue-700" />
-      </div>
-    ),
-  },
-];
+import { useDeleteMediaMutation } from '../../Feature/API/mediaSlice'; 
+
 
 const ExpandedImageView = ({ image, onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80">
@@ -102,46 +32,8 @@ const ExpandedImageView = ({ image, onClose }) => (
     </div>
   </div>
 );
-const rows = elements.map((element) => (
-  <tr key={element.No}>
-    <td className=" text-white">{element.No}</td>
-    <td className=" text-white">{element.name}</td>
-    <td className=" text-white">{element.account}</td>
-    <td className=" text-white">{element.date}</td>
-    <td className=" text-white">{element.time}</td>
-    <td className=" text-white">{element.filesize}</td>
-    <td className=" text-white">{element.action}</td>
-  </tr>
-));
-
-// const images = [
-//   {
-//     id: 1,
-//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-//   {
-//     id: 2,
-//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-//   {
-//     id: 3,
-//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-//   {
-//     id: 4,
-//     link: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-//   {
-//     id: 5,
-//     link: "https://plus.unsplash.com/premium_photo-1666273190872-1ad5f89e39f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-//   {
-//     id: 6,
-//     link: "https://plus.unsplash.com/premium_photo-1661476072172-359e53eb83d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-//   },
-// ];
-
 const Mediapgwpic = (props) => {
+  const [deleteMedia] = useDeleteMediaMutation(); 
   const token=Cookies.get('token');
   const [uploadMedia]=useUploadMediaMutation();
   const { data: mediaData, isLoading, isError } = useGetMediaQuery();
@@ -177,7 +69,69 @@ const Mediapgwpic = (props) => {
     }
   };
   const images =mediaData?.data;
-console.log(images);
+  const rows = images?.map((element) => {
+    let date_time=element.updated_at.split('T');
+    const copyPictureInfo = (element) => {
+      const infoToCopy = `Name: ${element.name}\nAccount: ${element.account}\nDate: ${date_time[0]}\nTime: ${date_time[1]}\nFile Size: ${element.file_size}`;
+      
+      // Create a temporary text area to hold the information
+      const textArea = document.createElement("textarea");
+      textArea.value = infoToCopy;
+    
+      // Append the text area to the document
+      document.body.appendChild(textArea);
+    
+      // Select and copy the text
+      textArea.select();
+      document.execCommand("copy");
+    
+      // Remove the temporary text area
+      document.body.removeChild(textArea);
+    
+      // Alert the user that the information has been copied
+      alert("Picture information copied to clipboard.");
+    };
+   console.log(element);
+
+    return(
+      <tr key={element.id}>
+      <td className=" text-white">{element.id}</td>
+      <td className=" text-white"><img className=" w-[50px] h-[50px] my-6" src={element.url} alt="" /></td>
+      <td className=" text-white">{element.account}</td>
+      <td className=" text-white">{date_time[0]}</td>
+      <td className=" text-white">{date_time[1]}</td>
+      <td className=" text-white">{element.file_size}</td>
+      <td className=" text-white">   <div className="  flex">
+        <RiDeleteBin5Line onClick={()=>handleDelete(element.id)} className=" text-lg m-1 cursor-pointer hover:text-red-700" />
+        <PiCopyDuotone  onClick={() => copyPictureInfo(element)} className=" text-lg m-1 cursor-pointer hover:text-blue-700" />
+      </div></td>
+    </tr>
+    )
+  }
+  
+    
+    
+  );
+  const handleDelete = async (id,token) => {
+console.log(token);
+    try {
+      // Call the deleteMedia mutation with the id of the picture to delete
+      const result = await deleteMedia({id,token});
+
+      if (result.error) {
+        // Handle any errors here
+        console.error('Error deleting media:', result.error);
+      } else {
+        // Handle success, e.g., update your component state
+        console.log('Media deleted successfully:', result.data);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+  console.log(mediaData);
+
   return (
     <div className="  ">
       <div className=" p-10">
@@ -271,7 +225,7 @@ console.log(images);
             <thead>
               <tr>
                 <th className=" text-gray-300">NO</th>
-                <th className=" text-gray-300">NAME</th>
+                <th className=" text-gray-300">File PREVIEW</th>
                 <th className=" text-gray-300">ACCOUNT</th>
                 <th className=" text-gray-300">DATE</th>
                 <th className=" text-gray-300">TIME</th>
