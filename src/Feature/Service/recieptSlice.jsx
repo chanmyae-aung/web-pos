@@ -17,7 +17,7 @@ export const recieptSlice=createSlice({
             return state
         }else{
             state.reciept=[...state.reciept,{...payload,quantity:1}]
-            state.totalPrice+=payload.actual_price
+            state.totalPrice+=payload.sale_price
         }
        }
     }

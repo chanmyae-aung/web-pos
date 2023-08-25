@@ -42,7 +42,7 @@ const Reciept = ({ calculator, printBtn, }) => {
                       <span>{item?.actual_price} MMK</span>
                     </span>
                   </div>
-                  <span className="text-semibold">{qty+1 * item?.actual_price}</span>
+                  <span className="text-semibold">{qty+1 * item?.sale_price}</span>
                 </div>
               </div>
               )

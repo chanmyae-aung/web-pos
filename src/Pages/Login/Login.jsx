@@ -1,59 +1,14 @@
 import React, { useState } from "react";
-import {
-  Paper,
-  createStyles,
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Button,
-  Title,
-  Text,
-  Anchor,
-  rem,
-} from "@mantine/core";
+
 import { useLoginMutation } from "../../Feature/API/authApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../Feature/Service/authSlice";
 import { toast } from "react-toastify";
 
-const useStyles = createStyles((theme) => ({
-  text: {
-    color: "#3F4245",
-  },
-  wrapper: {
-    minHeight: rem(660),
-    backgroundSize: "fit",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "right 20% top 50%",
-    backgroundImage:
-      "url(https://img.freepik.com/free-vector/self-checkout-concept-illustration_114360-2331.jpg)",
-  },
 
-  form: {
-    borderRight: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
-    }`,
-    minHeight: rem(660),
-    maxWidth: rem(500),
-    paddingTop: rem(90),
-    backgroundColor: "#f5f5f5",
-
-    [theme.fn.smallerThan("sm")]: {
-      maxWidth: "100%",
-    },
-  },
-  button: {
-    ":hover": {
-      background: "#3F4245",
-      color: "#f5f5f5",
-    },
-    color: "#3F4245",
-  },
-}));
 
 const Login = () => {
-  const { classes } = useStyles();
   const [email, setEmail] = useState("tth@gmail.com");
   const [password, setPassword] = useState("11223344");
   const [login] = useLoginMutation();
@@ -104,57 +59,88 @@ const Login = () => {
   };
 
   return (
-    <div className={classes.wrapper}>
-      <Paper className={classes.form} radius={0} p={30}>
-        <Title order={2} className={classes.text} ta="center" mt="md" mb={50}>
-          Welcome back to MMS POS!
-        </Title>
-
-        <TextInput
-          className={classes.text}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          label="Email address"
-          placeholder="yourname@gmail.com"
-          size="md"
-        />
-        <PasswordInput
-          className={classes.text}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          label="Password"
-          placeholder="Your password"
-          mt="md"
-          size="md"
-        />
-        <Checkbox
-          className={classes.text}
-          label="Keep me logged in"
-          mt="xl"
-          size="md"
-        />
-        <Button
-          className={classes.button}
-          onClick={loginHandler}
-          fullWidth
-          mt="xl"
-          size="md"
-        >
-          Login
-        </Button>
-
-        <Text className={classes.text} ta="center" mt="md">
-          Forget Password?{" "}
-          <Anchor
-            href="#"
-            weight={700}
-            onClick={(event) => event.preventDefault()}
-          >
-            Get Help to change password
-          </Anchor>
-        </Text>
-      </Paper>
+    <div className="bg-[#161618] h-screen w-screen">
+  <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
+    <div
+      className="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-[#202124] sm:mx-0"
+      style={{ height: 500 }}
+    >
+      <div className="flex flex-col w-full md:w-1/2 p-4">
+        <div className="flex flex-col flex-1 justify-center mb-8">
+          <h1 className="text-3xl text-center font-thin">Welcome to MMS POS </h1>
+          <div className="w-full mt-4">
+            <form
+              className="form-horizontal w-3/4 mx-auto"
+              method="POST"
+              action="#"
+            >
+              <div className="flex flex-col mt-4">
+                <input
+                  id="email"
+                  type="text"
+                  className="flex-grow h-8 px-2 border rounded border-grey-400"
+                  name="email"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
+                  placeholder="yourname@gmail.com"
+                />
+              </div>
+              <div className="flex flex-col mt-4">
+                <input
+                  id="password"
+                  type="password"
+                  className="flex-grow h-8 px-2 rounded border border-grey-400"
+                  name="password"
+                  required
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
+                  placeholder="Your Password"
+                />
+              </div>
+              <div className="flex items-center mt-4">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  id="remember"
+                  className="mr-2"
+                />{" "}
+                <label htmlFor="remember" className="text-sm text-grey-dark">
+                  Remember Me
+                </label>
+              </div>
+              <div className="flex flex-col mt-8">
+                <button
+                  type="submit"
+                  onClick={loginHandler}
+                  className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+            <div className="text-center mt-4">
+              <a
+                className="no-underline hover:underline text-blue-dark text-xs"
+                href="#"
+              >
+                Forgot Your Password?
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="hidden md:block md:w-1/2 rounded-r-lg"
+        style={{
+          background:
+            'url("https://img.freepik.com/free-vector/self-checkout-concept-illustration_114360-2331.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center center"
+        }}
+      />
     </div>
+  </div>
+</div>
   );
 };
 
