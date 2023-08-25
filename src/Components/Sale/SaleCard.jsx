@@ -24,7 +24,7 @@ const SaleCard = ({ pd }) => {
            {pd?.name.slice(0,5)}
           </Typography>
           <Typography sx={{ color: "#161618" }} variant="p" component="div">
-            {pd?.actual_price} MMK
+            {pd?.sale_price} MMK
           </Typography>
         </CardContent>
       </Card>
