@@ -25,7 +25,7 @@ export const recieptSlice = createSlice({
     qtyUpdate: (state, payload) => {
       state.activeValue = payload;
     },
-    listActiveUpdate: (state, payload) => {
+    listActiveUpdate: (state, [payload]) => {
       state.listActive = payload;
     },
   },
