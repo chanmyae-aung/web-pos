@@ -22,10 +22,10 @@ export const recieptSlice = createSlice({
         state.totalPrice += payload.sale_price;
       }
     },
-    qtyUpdate: (state, payload) => {
+    qtyUpdate: (state, {payload}) => {
       state.activeValue = payload;
     },
-    listActiveUpdate: (state, [payload]) => {
+    listActiveUpdate: (state, {payload}) => {
       state.listActive = payload;
     },
   },

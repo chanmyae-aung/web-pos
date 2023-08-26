@@ -17,21 +17,21 @@ const Calculator = () => {
           <input id="note" type="button" value="Note" />
         </div>
         <div className="flex justify-center btnUi border border-[#3f4245]">
-          <input  onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="1" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="2" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="3" />
+          <input  onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="1" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="2" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="3" />
           <input  id="one-fourth-btns" type="button" value="QTY" />
         </div>
         <div className="flex justify-center border btnUi border-[#3f4245]">
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="4" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="5" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="6" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="4" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="5" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="6" />
           <input  id="one-fourth-btns" type="button" value="DIS" />
         </div>
         <div className="flex justify-center btnUi  border border-[#3f4245]">
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="7" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="8" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="9" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="7" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="8" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="9" />
           <input
             
             id="one-fourth-btns"
@@ -41,7 +41,7 @@ const Calculator = () => {
         </div>
         <div className="flex justify-center border btnUi border-[#3f4245]">
           <input  id="one-fourth-btns" type="button" value="+/-" />
-          <input onClick={(e)=>dispatch(qtyUpdate(e.target.value))}  id="one-fourth-btns" type="button" value="0" />
+          <input onClick={(e)=>dispatch(qtyUpdate(parseInt(e.target.value)))}  id="one-fourth-btns" type="button" value="0" />
           <input  id="one-fourth-btns" type="button" value="." />
           <input  id="one-fourth-btns" type="button" value="DEL" />
         </div>
