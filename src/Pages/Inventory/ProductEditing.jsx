@@ -55,6 +55,7 @@ const ProductEditing = () => {
     {/* path breadcrumbs */}
     <div>
       <Breadcrumb
+      showBtn={true}
         icon={true}
         btnText={"Product list"}
         title={"Edit Product"}

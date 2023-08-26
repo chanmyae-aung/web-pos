@@ -59,6 +59,7 @@ export default function CreateUser() {
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
+        showBtn={true}
           icon={true}
           btnText={"User list"}
           title={"User"}

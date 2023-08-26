@@ -3,7 +3,7 @@ import Button from "../../Components/Button";
 import { BiChevronDown } from "react-icons/bi";
 import { MdOutlineEdit } from "react-icons/md";
 import { Typography } from "@mui/material";
-import { Breadcrumbs } from "@mantine/core";
+
 import { Link } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb";
 import FirstStep from '../Inventory/FirstStep';
@@ -54,6 +54,7 @@ const AddProduct = () => {
     {/* path breadcrumbs */}
     <div>
       <Breadcrumb
+      showBtn={true}
         icon={true}
         btnText={"Product list"}
         title={"Add Product"}

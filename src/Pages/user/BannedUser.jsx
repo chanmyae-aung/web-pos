@@ -36,7 +36,7 @@ export default function BannedUser() {
     <>
     {/* path breadcrumbs */}
     <div>
-      <Breadcrumb createUser={true} icon={true} btnText={"Create user"} title={"User"} firstRoute={"User"} secondRoute={"Banned"}/>
+      <Breadcrumb showBtn={true} createUser={true} icon={true} btnText={"Create user"} title={"User"} firstRoute={"User"} secondRoute={"Banned"}/>
     </div>
     {/* path breadcrumbs */}
     <div>

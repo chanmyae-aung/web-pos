@@ -36,7 +36,7 @@ export default function UserList() {
     <>
     {/* path breadcrumbs */}
     <div>
-      <Breadcrumb createUser={true} icon={true} btnText={"Create user"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
+      <Breadcrumb  showBtn={true} createUser={true} icon={true} btnText={"Create user"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
     </div>
     {/* path breadcrumbs */}
     <div>

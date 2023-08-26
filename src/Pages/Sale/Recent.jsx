@@ -27,6 +27,7 @@ const Recent = () => {
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
+        showBtn={true}
           icon={false}
           btnText={"Go to Shop"}
           title={"Recent"}

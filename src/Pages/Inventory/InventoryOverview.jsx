@@ -206,6 +206,7 @@ const InventoryOverview = () => {
       </Modal>
       <div className=" flex justify-between items-center">
         <Breadcrumb
+        showBtn={false}
           title={"Products"}
           firstRoute={"Inventory"}
           secondRoute={"Products"}

@@ -40,6 +40,7 @@ export default function MyAccount() {
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
+        showBtn={true}
           editProfile={true}
           btnText={"Edit profile"}
           title={"Profile"}

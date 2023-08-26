@@ -1,5 +1,5 @@
 import { Group } from "@mantine/core";
-import { useGetMediaQuery } from '../../Feature/API/mediaSlice';
+import { useGetMediaQuery } from "../../Feature/API/mediaSlice";
 
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import {
@@ -16,9 +16,9 @@ import { PiCopyDuotone } from "react-icons/pi";
 import Breadcrumb from "../../Components/Breadcrumb";
 import { useUploadMediaMutation } from "../../Feature/API/mediaSlice";
 import Cookies from "js-cookie";
-import { useDeleteMediaMutation } from '../../Feature/API/mediaSlice'; 
+import { useDeleteMediaMutation } from "../../Feature/API/mediaSlice";
 
-
+//Expanded image component
 const ExpandedImageView = ({ image, onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80">
     <div className="max-w-3xl mx-auto p-4">
@@ -28,109 +28,120 @@ const ExpandedImageView = ({ image, onClose }) => (
       >
         <AiOutlineClose className=" text-3xl" />
       </button>
-      <img src={image.link} alt="" className="rounded-lg" />
+      <img src={image.url} alt="" className="rounded-lg" />
     </div>
   </div>
 );
 const Mediapgwpic = (props) => {
-  const [deleteMedia] = useDeleteMediaMutation(); 
-  const token=Cookies.get('token');
-  const [uploadMedia]=useUploadMediaMutation();
-  const { data: mediaData, isLoading, isError } = useGetMediaQuery();
+  const [deleteMedia] = useDeleteMediaMutation(); //deleting media calling
+  const token = Cookies.get("token"); //cookie retrieving
+  const [uploadMedia] = useUploadMediaMutation(); //media upload calling
+  const { data: mediaData, isLoading, isError } = useGetMediaQuery(); //media upload retrieving
   const media = mediaData || [];
-  const [expandedImageId, setExpandedImageId] = useState(null);
-  const [displayState, setDisplayState] = useState(false);
-  const [displayState2, setDisplayState2] = useState(false);
+  const [expandedImageId, setExpandedImageId] = useState(null); //expanded image state
+  const [displayState, setDisplayState] = useState(false); //toggle view state
+  const [displayState2, setDisplayState2] = useState(false); //toggle view sttae
+ 
+  //func that upload media from dropzone
   const handleDropzoneUpload = async (acceptedFiles) => {
     try {
-      // Collect selected files in an array
-     console.log(acceptedFiles);
-     const photos=new FormData();
-     for(let i=0;i<acceptedFiles.length;i++){
-      photos.append('photos[]',acceptedFiles[i],acceptedFiles[i].name)
-     }
-       for (const  value of photos.entries()) {
+      console.log(acceptedFiles);
+      const photos = new FormData();
+      for (let i = 0; i < acceptedFiles.length; i++) {
+        photos.append("photos[]", acceptedFiles[i], acceptedFiles[i].name);
+      }
+      for (const value of photos.entries()) {
         console.log(value);
         console.log(token);
-        
-       }
+      }
       // Use the mutation hook to upload the array of files
-      const result = await uploadMedia({photos,token});
-  
+      const result = await uploadMedia({ photos, token });
+
       if (result.error) {
         // Handle any errors here
-        console.error('Error uploading files:', result.error);
+        console.error("Error uploading files:", result.error);
       } else {
         // Handle success, e.g., update your component state
-        console.log('Files uploaded successfully:', result.data);
+        console.log("Files uploaded successfully:", result.data);
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     }
   };
-  const images =mediaData?.data;
+  const images = mediaData?.data; //inserting retrieved arr from server into a veraible
+  //data within the table
   const rows = images?.map((element) => {
-    let date_time=element.updated_at.split('T');
+    let date_time = element.updated_at.split("T");
     const copyPictureInfo = (element) => {
       const infoToCopy = `Name: ${element.name}\nAccount: ${element.account}\nDate: ${date_time[0]}\nTime: ${date_time[1]}\nFile Size: ${element.file_size}`;
-      
+
       // Create a temporary text area to hold the information
       const textArea = document.createElement("textarea");
       textArea.value = infoToCopy;
-    
+
       // Append the text area to the document
       document.body.appendChild(textArea);
-    
+
       // Select and copy the text
       textArea.select();
       document.execCommand("copy");
-    
+
       // Remove the temporary text area
       document.body.removeChild(textArea);
-    
+
       // Alert the user that the information has been copied
       alert("Picture information copied to clipboard.");
     };
-   console.log(element);
+    console.log(element);
 
-    return(
+    return (
       <tr key={element.id}>
-      <td className=" text-white">{element.id}</td>
-      <td className=" text-white"><img className=" w-[50px] h-[50px] my-6" src={element.url} alt="" /></td>
-      <td className=" text-white">{element.account}</td>
-      <td className=" text-white">{date_time[0]}</td>
-      <td className=" text-white">{date_time[1]}</td>
-      <td className=" text-white">{element.file_size}</td>
-      <td className=" text-white">   <div className="  flex">
-        <RiDeleteBin5Line onClick={()=>handleDelete(element.id)} className=" text-lg m-1 cursor-pointer hover:text-red-700" />
-        <PiCopyDuotone  onClick={() => copyPictureInfo(element)} className=" text-lg m-1 cursor-pointer hover:text-blue-700" />
-      </div></td>
-    </tr>
-    )
-  }
-  
-    
-    
-  );
-  const handleDelete = async (id,token) => {
-console.log(token);
-    try {
-      // Call the deleteMedia mutation with the id of the picture to delete
-      const result = await deleteMedia({id,token});
+        <td className=" text-white">{element.id}</td>
+        <td className=" text-white">
+          <img className=" w-[50px] h-[50px] my-6" src={element.url} alt="" />
+        </td>
+        <td className=" text-white">{element.account}</td>
+        <td className=" text-white">{date_time[0]}</td>
+        <td className=" text-white">{date_time[1]}</td>
+        <td className=" text-white">{element.file_size}</td>
+        <td className=" text-white">
+          {" "}
+          <div className="  flex">
+            <RiDeleteBin5Line
+              onClick={() => handleDelete(element.id)}
+              className=" text-lg m-1 cursor-pointer hover:text-red-700"
+            />
+            <PiCopyDuotone
+              onClick={() => copyPictureInfo(element)}
+              className=" text-lg m-1 cursor-pointer hover:text-blue-700"
+            />
+          </div>
+        </td>
+      </tr>
+    );
+  });
+  //func for deleting media
+  const handleDelete = async (id, token) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this media?"
+    );
+    if (isConfirmed) {
+      try {
+        // Call the deleteMedia mutation with the id of the picture to delete
+        const result = await deleteMedia({ id, token });
 
-      if (result.error) {
-        // Handle any errors here
-        console.error('Error deleting media:', result.error);
-      } else {
-        // Handle success, e.g., update your component state
-        console.log('Media deleted successfully:', result.data);
+        if (result.error) {
+          // Handle any errors here
+          console.error("Error deleting media:", result.error);
+        } else {
+          // Handle success, e.g., update your component state
+          console.log("Media deleted successfully:", result.data);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
     }
   };
-
-  console.log(mediaData);
 
   return (
     <div className="  ">
@@ -139,12 +150,13 @@ console.log(token);
           title={"Media"}
           firstRoute={"Media"}
           secondRoute={"Uploader"}
-          butt
+          showBtn={false}
         />
+
         <Dropzone
           className=" mt-6 mb-10 bg-softblack  hover:bg-softblack border border-solid"
           onDrop={handleDropzoneUpload} // Call the upload function here
-          onReject={(files) => console.log('rejected files', files)}
+          onReject={(files) => console.log("rejected files", files)}
           maxSize={3 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
           {...props}
@@ -174,10 +186,10 @@ console.log(token);
           </Group>
         </Dropzone>
         <div className=" pb-4 flex justify-between items-center">
-          <Breadcrumb firstRoute={"Media"} secondRoute={"Uploaded photo"} />
+          <Breadcrumb showBtn={false} firstRoute={"Media"} secondRoute={"Uploaded photo"} />
           <div className="">
             <AiOutlineOrderedList
-              onClick={() => setDisplayState(false) && setDisplayState2(true) }
+              onClick={() => setDisplayState(false) && setDisplayState2(true)}
               className={`${displayState ? "text-blue-800" : "text-gray-300"} ${
                 displayState ? "border-blue-800" : "border-gray-300"
               } hover:text-blue-800 hover:border-blue-800 text-gray-300 border cursor-pointer border-solid border-gray-300 mx-2 inline`}
@@ -213,7 +225,7 @@ console.log(token);
           })}
           {expandedImageId !== null && (
             <ExpandedImageView
-              image={images.find((img) => img.id === expandedImageId)}
+              image={images.find((i) => i.id === expandedImageId)}
               onClose={() => setExpandedImageId(null)}
             />
           )}
