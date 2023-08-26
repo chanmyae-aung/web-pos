@@ -5,11 +5,16 @@ import { FaPhoneVolume } from "react-icons/fa";
 import { BiSolidUser } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useCreateUserMutation } from "../../Feature/API/userApi";
+import Cookies from "js-cookie";
 
 export default function UserRef() {
+  const token = Cookies.get("token")
   const userData = useSelector((state) => state.userSlice);
   console.log(userData);
   const editImage = document.querySelector(".file");
+
+ 
   return (
     <div className={`w-full`}>
       <main className={`flex items-center mt-16`}>
@@ -21,7 +26,7 @@ export default function UserRef() {
               >
                 <img
                   className={`w-full h-full object-cover`}
-                  src={URL.createObjectURL(userData.user_photo)}
+                  src={userData?.user_photo}
                   alt=""
                 />
               </div>

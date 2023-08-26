@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 const initialState = {
   name: null,
   email: null,
+  role: null,
   password: null,
   password_confirmation: null,
   phone: null,
@@ -22,6 +23,9 @@ export const userSlice = createSlice({
     },
     addPhone: (state, { payload }) => {
       state.phone = payload.phone;
+    },
+    addRole: (state, {payload}) => {
+      state.role = payload.role
     },
     addBirthDate: (state, { payload }) => {
       state.date_of_birth = payload.date_of_birth;
@@ -52,6 +56,7 @@ export const {
   addBirthDate,
   addName,
   addPhone,
+  addRole,
   addConfirmPass,
   addGender,
   addEmail,

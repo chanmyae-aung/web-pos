@@ -60,7 +60,7 @@ export default function StepOne({editUser}) {
                 <div className={`w-[70%] flex items-center gap-10`}>
                   <div className={`flex items-center gap-2`}>
                     <input
-                    onChange={(e) => e.target.value && dispatch(addGender({gender:  "Male"}))}
+                    onChange={(e) => e.target.value && dispatch(addGender({gender:  "male"}))}
                       className={``}
                       type="radio"
                       name="gender"
@@ -70,7 +70,7 @@ export default function StepOne({editUser}) {
                   </div>
                   <div className={`flex items-center gap-2`}>
                     <input
-                    onChange={(e) => e.target.value && dispatch(addGender({gender:  "Female"}))}
+                    onChange={(e) => e.target.value && dispatch(addGender({gender:  "female"}))}
                       className={``}
                       type="radio"
                       name="gender"

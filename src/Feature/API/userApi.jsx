@@ -17,6 +17,7 @@ export const userApi = createApi({
     createUser: builder.mutation({
       query: ({ token, userData }) => ({
         url: "/register",
+        method: "POST",
         body: userData,
         headers: {
           authorization: `Bearer ${token}`,

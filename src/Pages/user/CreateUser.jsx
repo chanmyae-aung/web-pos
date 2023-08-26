@@ -8,14 +8,16 @@ import UserRef from "../../Components/User/UserRef";
 import Cookies from "js-cookie";
 import { useCreateUserMutation } from "../../Feature/API/userApi";
 import SelectPhotoModal from "../../Components/SelectPhotoModal";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateUser() {
   const token = Cookies.get("token");
+  const nav = useNavigate()
   const [show, setShow] = useState(false)
   const toggleShow = () => {
     setShow(!show)
   }
-  const [create] = useCreateUserMutation();
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -50,10 +52,15 @@ export default function CreateUser() {
   const toggleSelect = () => {
     setSelect(!select);
   };
-  const handleCreateUser = (e) => {
-    e.preventDefault();
-  };
+  const userData = useSelector(state => state.userSlice)
 
+  const [createUser] = useCreateUserMutation()
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+    const {data} = await createUser({userData, token})
+    console.log(data)
+    data?.message == "User register successful" && nav('/user-overview')
+  };
   return (
     <div>
       {/* path breadcrumbs */}
@@ -146,8 +153,8 @@ export default function CreateUser() {
               </div>
             )}
             {state.createStep && (
-              <div className="my-5 cursor-pointer">
-                <Button icon={true} text={"Create"} />
+              <div onClick={handleCreateUser} className="my-5 cursor-pointer">
+                <Button text={"Create"} />
               </div>
             )}
           </section>
