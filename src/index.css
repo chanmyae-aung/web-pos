@@ -58,6 +58,8 @@ h4 {
 .btnUi #one-fourth-btns{
   @apply w-1/4 border-r border-[#3f4245] text-center hover:bg-[#3f4245] transition-all  py-4
 }
-/* .btnUi #one-fourth-btns:active{
-  @apply bg-[#161618]
-} */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
