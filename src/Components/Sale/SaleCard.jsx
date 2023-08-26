@@ -5,22 +5,26 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { addtoReciept } from "../../Feature/Service/recieptSlice";
 
-const SaleCard = ({ setCardAdd, cardAdd }) => {
+const SaleCard = ({ pd }) => {
+  console.log(pd);
+  const dispatch=useDispatch();
   return (
-    <div className="mt-1 " onClick={() => setCardAdd(cardAdd + 1)}>
+    <div className="mt-1 " onClick={() => dispatch(addtoReciept(pd)) }>
       <Card sx={{ minWidth: 120 }}>
         <CardMedia
           sx={{ height: 100 }}
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ868djAR5mIlAFnnjF---4paarCg48aQTr-g&usqp=CAU"
-          title="green iguana"
+          image={pd?.photo}
+          title={pd?.name}
         />
         <CardContent sx={{height:75}}>
-          <Typography sx={{ color: "#161618" }} variant="h5" component="div">
-            Apple
+          <Typography  sx={{ color: "#161618" }} variant="h5" component="div">
+           {pd?.name.slice(0,5)}
           </Typography>
           <Typography sx={{ color: "#161618" }} variant="p" component="div">
-            1000 mmk
+            {pd?.sale_price} MMK
           </Typography>
         </CardContent>
       </Card>

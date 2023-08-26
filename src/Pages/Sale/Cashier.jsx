@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Reciept from "../../Components/Sale/Reciept";
 import { Breadcrumbs } from "@mantine/core";
 import { Link } from "@mui/material";
 import SaleCard from "../../Components/Sale/SaleCard";
+import { useGetallProductsQuery } from "../../Feature/API/getallProductsApi";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
 
 const Cashier = () => {
+  const token = Cookies.get("token")
+  const allProducts=useGetallProductsQuery(token);
+  console.log({allProducts});
+  const products=allProducts?.data?.data;
   return (
     <>
       <div className="bg-[#202124] text-[#f5f5f5] w-full h-screen overflow-auto ">
@@ -57,20 +64,18 @@ const Cashier = () => {
               />
             </div>
             {/* sale cards */}
-            <div className="px-1 flex flex-wrap gap-2 overflow-scroll  justify-center items-center">
-              
-              <SaleCard />
-              <SaleCard />
-              <SaleCard />
-              <SaleCard />
-              <SaleCard />
-              <SaleCard />
+            <div className="px-1 flex flex-wrap gap-2 overflow-scroll  justify-center ">
+              {products?.map((pd,i)=>{
+                return(
+                  <SaleCard key={i} pd={pd}  />
+                )
+              })}
             </div>
           </div>
 
           {/* reciept section 2 (calculator) */}
           <div className="w-[30%] h-full border-l border-[#3f4245]">
-            <Reciept calculator={true} printBtn={false} />
+            <Reciept calculator={true} printBtn={false}  />
           </div>
         </div>
       </div>
