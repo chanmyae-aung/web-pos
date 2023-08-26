@@ -7,7 +7,7 @@ import { BsCashCoin, BsCreditCard, BsCreditCard2Back } from "react-icons/bs";
 import { HiArrowSmLeft } from "react-icons/hi";
 
 const Checkout = ({ calculator, printBtn,cardAdd,setCardAdd }) => {
-
+  
   return (
     <>
       <NavBar />
