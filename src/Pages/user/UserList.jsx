@@ -25,8 +25,8 @@ export default function UserList() {
       <td>{i.email}</td>
       <td className="flex gap-5">
         <BsDash className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
-        <MdOutlineEdit className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
-        <BsArrowRight onClick={() => nav("/user-detail")} className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
+        <MdOutlineEdit onClick={() => nav(`/edit-user/${i.id}`)} className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
+        <BsArrowRight onClick={() => nav(`/user-detail/${i.id}`)} className="text-3xl hover:bg-gray-50 hover:text-gray-500 rounded-full bg-gray-500 text-gray-50 p-1.5 cursor-pointer transition-all duration-200 ease-in" />
       </td>
     </tr>
   ));
