@@ -9,9 +9,9 @@ const Reciept = ({ calculator, printBtn }) => {
   const { reciept, qty, totalPrice, activeValue, listActive } = useSelector(
     (state) => state.recieptSlice
   );
-  console.log(reciept);
-  console.log(activeValue);
-  console.log(listActive.payload);
+  console.log(reciept); // selected_items
+  console.log(activeValue); // calculator input
+  console.log(listActive); // product_id
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ const Reciept = ({ calculator, printBtn }) => {
                     <div className="flex flex-col">
                       <p
                         className={
-                          listActive.payload == item?.product_id
+                          listActive == item?.product_id
                             ? `font-semibold text-blue-500 leading-loose tracking-wider text-[1rem]`
                             : ` font-semibold leading-loose tracking-wider text-[1rem]`
                         }
@@ -57,15 +57,15 @@ const Reciept = ({ calculator, printBtn }) => {
                       </p>
                       <span className="text-[0.8rem] font-thin">
                         <span className="mr-2">
-                          {listActive.payload===item?.product_id ? `${activeValue.payload}`: `${item?.quantity}`}
+                          {listActive === item?.product_id ? `${activeValue}`: `${item?.quantity}`}
                           pcs
                         </span>
                         <span>{item?.sale_price} MMK</span>
                       </span>
                     </div>
                     <span className="text-semibold">
-                      {listActive.payload === item?.product_id
-                        ? `${activeValue.payload * item?.sale_price} `
+                      {listActive === item?.product_id
+                        ? `${activeValue * item?.sale_price} `
                         : `${item?.quantity * item?.sale_price} `}
                     </span>
                   </div>
