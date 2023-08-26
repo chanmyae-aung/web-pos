@@ -11,7 +11,7 @@ const Calculator = () => {
   return (
     <div className="w-[25.3rem] fixed bottom-0 text-xs bg-[#202124] text-[#f5f5f5]">
       <div className="flex flex-col">
-        <div className="flex justify-center tableUi border border-[#3f4245]">
+        <div  className="flex justify-center tableUi border border-[#3f4245]">
           <input id="note" className="" type="button" value="Note" />
           <input id="note" type="button" value="Note" />
           <input id="note" type="button" value="Note" />
