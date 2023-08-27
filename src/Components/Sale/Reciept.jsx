@@ -17,6 +17,8 @@ const Reciept = ({ calculator, printBtn }) => {
 
   useEffect(() => {}, [activeValue]);
 
+  
+
   const printHandler = () => {
     window.print();
   };
@@ -40,7 +42,7 @@ const Reciept = ({ calculator, printBtn }) => {
             {reciept?.map((item) => {
               return (
                 <Link
-                  onClick={() => dispatch(listActiveUpdate(item?.product_id))}
+                  onClick={() => dispatch(listActiveUpdate(item))}
                   key={item?.product_id}
                   className="mt-5  px-4 pt-2 mx-auto overflow-visible"
                 >
@@ -57,7 +59,9 @@ const Reciept = ({ calculator, printBtn }) => {
                       </p>
                       <span className="text-[0.8rem] font-thin">
                         <span className="mr-2">
-                          {listActive === item?.product_id ? `${activeValue}`: `${item?.quantity}`}
+                          {/* {listActive === item?.product_id ? `${activeValue}`: `${item?.quantity}`} */}
+                          {/* {item?.quantity} */}
+                          {item?.quantity}
                           pcs
                         </span>
                         <span>{item?.sale_price} MMK</span>
