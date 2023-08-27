@@ -3,21 +3,31 @@ import Calculator from "./Calculator";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { listActiveUpdate } from "../../Feature/Service/recieptSlice";
+import { setListSelector } from "../../Feature/Service/recieptSlice";
 
 const Reciept = ({ calculator, printBtn }) => {
-  const { reciept, qty, totalPrice, activeValue, listActive } = useSelector(
-    (state) => state.recieptSlice
-  );
-  console.log(reciept); // selected_items
-  console.log(activeValue); // calculator input
-  console.log(listActive); // product_id
-
   const dispatch = useDispatch();
+  const {
+    reciept,
+    totalPrice,
+    listSelector,
+    activeValue,
+    initialChanged,
+    tax,
+  } = useSelector((state) => state.recieptSlice);
 
-  useEffect(() => {}, [activeValue]);
+  const newList = {
+    recieptNew: reciept.map((ele) => {
+      return {
+        product_id: ele.id,
+        quantity: Number(ele.quantity),
+      };
+    }),
+  };
 
-  
+  const listActiveUpdate = (id) => {
+    dispatch(setListSelector(id));
+  };
 
   const printHandler = () => {
     window.print();
@@ -42,35 +52,29 @@ const Reciept = ({ calculator, printBtn }) => {
             {reciept?.map((item) => {
               return (
                 <Link
-                  onClick={() => dispatch(listActiveUpdate(item))}
+                  onClick={(e) => listActiveUpdate(item?.product_id)}
                   key={item?.product_id}
                   className="mt-5  px-4 pt-2 mx-auto overflow-visible"
                 >
                   <div className="flex justify-between border-b mb-1 pb-2 border-gray-600">
                     <div className="flex flex-col">
                       <p
-                        className={
-                          listActive == item?.product_id
-                            ? `font-semibold text-blue-500 leading-loose tracking-wider text-[1rem]`
-                            : ` font-semibold leading-loose tracking-wider text-[1rem]`
-                        }
+                        className={`${
+                          listSelector == item?.product_id && "text-blue-600"
+                        } font-semibold leading-loose tracking-wider text-[1rem] `}
                       >
                         {item?.name.slice(0, 7)}
                       </p>
                       <span className="text-[0.8rem] font-thin">
                         <span className="mr-2">
-                          {/* {listActive === item?.product_id ? `${activeValue}`: `${item?.quantity}`} */}
-                          {/* {item?.quantity} */}
-                          {item?.quantity}
+                          {item?.quantity == "" ? "0" : item?.quantity}
                           pcs
                         </span>
                         <span>{item?.sale_price} MMK</span>
                       </span>
                     </div>
                     <span className="text-semibold">
-                      {listActive === item?.product_id
-                        ? `${activeValue * item?.sale_price} `
-                        : `${item?.quantity * item?.sale_price} `}
+                      {Number(item?.quantity) * item?.sale_price}
                     </span>
                   </div>
                 </Link>
@@ -80,7 +84,7 @@ const Reciept = ({ calculator, printBtn }) => {
         </div>
         {calculator && (
           <div className="h-[50%]  ">
-            <Calculator activeValue={activeValue} />
+            <Calculator />
           </div>
         )}
         <div className="mt-auto flex flex-col justify-start ">
