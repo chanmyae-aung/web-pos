@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,13 +13,28 @@ export default function StepTwo({
   display,
   setDisplay,
   select,
-  editUser,
+  userEdit,
+  token,
+  id,
 }) {
+  // const {data} = useGetSingleUserQuery({token, id})
+  // console.log(data)
   const dispatch = useDispatch();
+  const [editUser, setEditUser] = useState({
+    password: "",
+    password_confirmation: "",
+  });
+  console.log(editUser)
+  useEffect(() => {
+    dispatch(addPassword({ password: editUser.password }));
+    dispatch(
+      addConfirmPass({ password_confirmation: editUser.password_confirmation })
+    );
+  }, [editUser]);
   return (
     <div>
       <section className={`flex flex-col gap-5 bg-[#161618] p-10 w-full`}>
-        {!editUser && (
+        {!userEdit && (
           <div className={`flex`}>
             <label className="block mb-2 w-[30%]" htmlFor="">
               Position
@@ -42,20 +57,22 @@ export default function StepTwo({
                 } transition-all duration-150 origin-top z-40 border rounded absolute w-full top-14`}
               >
                 <div
-              
                   onClick={(e) => {
                     setDisplay(e.target.textContent);
-                    dispatch(addRole({ role: e.target.textContent.toLowerCase() }));
+                    dispatch(
+                      addRole({ role: e.target.textContent.toLowerCase() })
+                    );
                   }}
                   className="w-full outline-none py-3 bg-[#202124] px-5 rounded-t border-b cursor-pointer"
                 >
                   Admin
                 </div>
                 <div
-              
                   onClick={(e) => {
                     setDisplay(e.target.textContent);
-                    dispatch(addRole({ role: e.target.textContent.toLowerCase() }));
+                    dispatch(
+                      addRole({ role: e.target.textContent.toLowerCase() })
+                    );
                   }}
                   className="w-full outline-none py-3 bg-[#202124] px-5 rounded-b cursor-pointer"
                 >
@@ -65,7 +82,7 @@ export default function StepTwo({
             </div>
           </div>
         )}
-        {!editUser && (
+        {!userEdit && (
           <div className="flex">
             <label className="w-[30%]">Email</label>
             <input
@@ -82,9 +99,12 @@ export default function StepTwo({
           <div className="flex">
             <label className="w-[30%]">Password</label>
             <input
-              onChange={(e) =>
-                dispatch(addPassword({ password: e.target.value }))
-              }
+              onChange={(e) => {
+                setEditUser((prevState) => ({
+                  ...prevState,
+                  password: e.target.value,
+                }));
+              }}
               placeholder="Enter your password"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
               type="password"
@@ -97,11 +117,12 @@ export default function StepTwo({
           <div className="flex">
             <label className="w-[30%]">Confirm Password</label>
             <input
-              onChange={(e) =>
-                dispatch(
-                  addConfirmPass({ password_confirmation: e.target.value })
-                )
-              }
+              onChange={(e) => {
+                setEditUser((prevState) => ({
+                  ...prevState,
+                  password_confirmation: e.target.value,
+                }));
+              }}
               placeholder="Confirm your password"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
               type="password"
