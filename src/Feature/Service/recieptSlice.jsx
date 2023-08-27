@@ -4,7 +4,7 @@ const initialState = {
   reciept: [],
   totalPrice: 0,
   activeValue: 1,
-  listActive: 0,
+  listActive:0,
 };
 
 export const recieptSlice = createSlice({
@@ -26,11 +26,13 @@ export const recieptSlice = createSlice({
       state.activeValue = payload;
     },
     listActiveUpdate: (state, {payload}) => {
-      state.listActive = payload;
-    },
+    state.listActive = payload.product_id;
+      state.reciept=state.reciept.map((ele)=>ele.product_id=== state.listActive ? {...payload, quantity : state.activeValue}: ele)
+      state.activeValue=1;
+    
+     },
   },
 });
-
 export const { addtoReciept, qtyUpdate, listActiveUpdate } =
   recieptSlice.actions;
 export default recieptSlice.reducer;
