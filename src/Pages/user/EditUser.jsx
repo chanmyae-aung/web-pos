@@ -12,6 +12,7 @@ import StepOne from "../../Components/User/StepOne";
 import UserRef from "../../Components/User/UserRef";
 import Cookies from "js-cookie";
 import { useCreateUserMutation, useGetSingleUserQuery, useUpdateUserMutation } from "../../Feature/API/userApi";
+import { useSelector } from "react-redux";
 
 export default function EditUser() {
   const token = Cookies.get("token");
@@ -35,14 +36,24 @@ export default function EditUser() {
     setSelect(!select);
   };
 
+  const editUserData = useSelector(state => (state.userSlice))
+  const name = editUserData?.name
+  const email = editUserData?.email
+  const phone = editUserData?.phone
+  const gender = editUserData?.gender
+  const address = editUserData?.address
+  const date_of_birth = editUserData?.date_of_birth
+  const password = editUserData?.password
+  const password_confirmation = editUserData?.password_confirmation
+
   const {data} = useGetSingleUserQuery({token, id})
-  console.log(data)
-
+  
   const [updateUser] = useUpdateUserMutation()
-
+  
   const handleEditUser = async (e) => {
     e.preventDefault();
-    const {data} = await updateUser({token, id, updateUserData})
+    const updateUserData = {name, email, phone, gender, address, date_of_birth, password, password_confirmation}
+    const {data} = await updateUser({updateUserData, id, token})
     console.log(data)
   };
   return (
@@ -105,12 +116,12 @@ export default function EditUser() {
             </div>
             
             {state.stepOne && (
-              <div onClick={handleStep2} className="my-5 cursor-pointer">
+              <div type="button" onClick={handleStep2} className="my-5 cursor-pointer">
                 <Button icon={true} text={"Next"} />
               </div>
             )}
             {state.stepTwo && (
-              <div className="my-5 cursor-pointer">
+              <div onClick={handleEditUser} className="my-5 cursor-pointer">
                 <Button text={"Submit"} />
               </div>
             )}

@@ -1,18 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const userApi = createApi({
-  reducerPath: "userApi",
+export const profileApi = createApi({
+  reducerPath: "profileApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://b.mmsdev.site/api/v1" }),
-  tagTypes: ["userApi"],
+  tagTypes: ["profileApi"],
   endpoints: (builder) => ({
-    getAllUsers: builder.query({
-      query: ({ currentPage, token }) => ({
-        url: `/users?page=${currentPage}`,
+    getProfile: builder.query({
+      query: (token) => ({
+        url: `/profile`,
         headers: {
           authorization: `Bearer ${token}`,
         },
       }),
-      providesTags: ["userApi"],
+      providesTags: ["profileApi"],
     }),
     createUser: builder.mutation({
       query: ({ token, userData }) => ({
@@ -23,7 +23,7 @@ export const userApi = createApi({
           authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["userApi"],
+      invalidatesTags: ["profileApi"],
     }),
     getSingleUser: builder.query({
       query: ({ token, id }) => ({
@@ -32,7 +32,7 @@ export const userApi = createApi({
           authorization: `Bearer ${token}`,
         },
       }),
-      providesTags: ["userApi"],
+      providesTags: ["profileApi"],
     }),
     updateUser: builder.mutation({
       query: ({ token, id }) => ({
@@ -43,7 +43,7 @@ export const userApi = createApi({
           authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["userApi"],
+      invalidatesTags: ["profileApi"],
     }),
     deleteUser: builder.mutation({
       query: ({ token, id }) => ({
@@ -53,16 +53,12 @@ export const userApi = createApi({
           authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["userApi"],
+      invalidatesTags: ["profileApi"],
     }),
     
   }),
 });
 
 export const {
-  useGetAllUsersQuery,
-  useCreateUserMutation,
-  useGetSingleUserQuery,
-  useDeleteUserMutation,
-  useUpdateUserMutation,
-} = userApi;
+  useGetProfileQuery,
+} = profileApi;

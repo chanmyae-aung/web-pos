@@ -14,26 +14,27 @@ export default function StepTwo({
   setDisplay,
   select,
   userEdit,
-  token, id
+  token,
+  id,
 }) {
-
   // const {data} = useGetSingleUserQuery({token, id})
   // console.log(data)
   const dispatch = useDispatch();
   const [editUser, setEditUser] = useState({
-    password: '',
-    password_confirmation: '',
-  })
-  // useEffect(() => {
-  //   setEditUser({
-  //     password: data?.user.password,
-  //     password_confirmation: data?.user.password_confirmation
-  //   })
-  // },[data])
+    password: "",
+    password_confirmation: "",
+  });
+  console.log(editUser)
+  useEffect(() => {
+    dispatch(addPassword({ password: editUser.password }));
+    dispatch(
+      addConfirmPass({ password_confirmation: editUser.password_confirmation })
+    );
+  }, [editUser]);
   return (
     <div>
       <section className={`flex flex-col gap-5 bg-[#161618] p-10 w-full`}>
-        {!editUser && (
+        {!userEdit && (
           <div className={`flex`}>
             <label className="block mb-2 w-[30%]" htmlFor="">
               Position
@@ -56,20 +57,22 @@ export default function StepTwo({
                 } transition-all duration-150 origin-top z-40 border rounded absolute w-full top-14`}
               >
                 <div
-              
                   onClick={(e) => {
                     setDisplay(e.target.textContent);
-                    dispatch(addRole({ role: e.target.textContent.toLowerCase() }));
+                    dispatch(
+                      addRole({ role: e.target.textContent.toLowerCase() })
+                    );
                   }}
                   className="w-full outline-none py-3 bg-[#202124] px-5 rounded-t border-b cursor-pointer"
                 >
                   Admin
                 </div>
                 <div
-              
                   onClick={(e) => {
                     setDisplay(e.target.textContent);
-                    dispatch(addRole({ role: e.target.textContent.toLowerCase() }));
+                    dispatch(
+                      addRole({ role: e.target.textContent.toLowerCase() })
+                    );
                   }}
                   className="w-full outline-none py-3 bg-[#202124] px-5 rounded-b cursor-pointer"
                 >
@@ -82,7 +85,7 @@ export default function StepTwo({
         {!userEdit && (
           <div className="flex">
             <label className="w-[30%]">Email</label>
-            <input 
+            <input
               onChange={(e) => dispatch(addEmail({ email: e.target.value }))}
               placeholder="Enter your email"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
@@ -95,10 +98,13 @@ export default function StepTwo({
         {
           <div className="flex">
             <label className="w-[30%]">Password</label>
-            <input value={editUser?.password}
-              onChange={(e) =>
-                setEditUser({password: e.target.value})
-              }
+            <input
+              onChange={(e) => {
+                setEditUser((prevState) => ({
+                  ...prevState,
+                  password: e.target.value,
+                }));
+              }}
               placeholder="Enter your password"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
               type="password"
@@ -110,10 +116,13 @@ export default function StepTwo({
         {
           <div className="flex">
             <label className="w-[30%]">Confirm Password</label>
-            <input value={editUser?.password_confirmation}
-              onChange={(e) =>
-                setEditUser({password_confirmation: e.target.value})
-              }
+            <input
+              onChange={(e) => {
+                setEditUser((prevState) => ({
+                  ...prevState,
+                  password_confirmation: e.target.value,
+                }));
+              }}
               placeholder="Confirm your password"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
               type="password"

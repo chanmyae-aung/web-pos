@@ -10,14 +10,19 @@ import { useCreateUserMutation } from "../../Feature/API/userApi";
 import SelectPhotoModal from "../../Components/SelectPhotoModal";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ConfirmBox from "../../Components/ConfirmBox";
 
 export default function CreateUser() {
   const token = Cookies.get("token");
-  const nav = useNavigate()
-  const [show, setShow] = useState(false)
+  const nav = useNavigate();
+  const [show, setShow] = useState(false);
   const toggleShow = () => {
-    setShow(!show)
-  }
+    setShow(!show);
+  };
+  const [alert, setAlert] = useState(false);
+  const toggleAlert = () => {
+    setAlert(!alert);
+  };
   const [state, setState] = useState({
     stepOne: true,
     stepTwo: false,
@@ -52,17 +57,18 @@ export default function CreateUser() {
   const toggleSelect = () => {
     setSelect(!select);
   };
-  const userData = useSelector(state => state.userSlice)
+  const userData = useSelector((state) => state.userSlice);
 
-  const [createUser] = useCreateUserMutation()
+  const [createUser] = useCreateUserMutation();
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    const {data} = await createUser({userData, token})
-    console.log(data)
-    data?.message == "User register successful" && nav('/user-overview')
+    const { data } = await createUser({ userData, token });
+    console.log(data);
+    data?.message == "User register successful" &&
+      setAlert(true)
   };
   return (
-    <div>
+    <div className="relative">
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
@@ -75,8 +81,12 @@ export default function CreateUser() {
       </div>
       {/* path breadcrumbs */}
 
-      <div className={`${show ? "scale-y-1" : "scale-y-0" } transition-all duration-400 origin-center absolute z-20 items-center bg-[#202124] justify-center`}>
-        <SelectPhotoModal setShow={setShow} toggleShow={toggleShow}/>
+      <div
+        className={`${
+          show ? "scale-y-1" : "scale-y-0"
+        } transition-all duration-400 origin-center absolute z-20 items-center bg-[#202124] justify-center`}
+      >
+        <SelectPhotoModal setShow={setShow} toggleShow={toggleShow} />
       </div>
       <main className="mt-7">
         <form action="" className={`flex gap-10`}>
@@ -100,7 +110,7 @@ export default function CreateUser() {
           {/* Photo Upload  */}
           {state.stepThree && (
             <div className="w-[70%]">
-              <StepThree toggleShow={toggleShow}/>
+              <StepThree toggleShow={toggleShow} />
             </div>
           )}
           {/* Create Step  */}
@@ -113,7 +123,10 @@ export default function CreateUser() {
           <section className={`w-[30%] flex flex-col justify-center`}>
             <div className="flex items-center gap-3 my-3">
               <div
-                className={`${(state.stepTwo || state.stepThree || state.createStep) && "bg-[#7DADFA]"} w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
+                className={`${
+                  (state.stepTwo || state.stepThree || state.createStep) &&
+                  "bg-[#7DADFA]"
+                } w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
               >
                 <p>1</p>
               </div>
@@ -122,7 +135,9 @@ export default function CreateUser() {
             <div className="border-l py-5 ml-5"></div>
             <div className="flex items-center gap-3 my-3">
               <div
-                className={`${(state.stepThree || state.createStep) && "bg-[#7DADFA]"} w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
+                className={`${
+                  (state.stepThree || state.createStep) && "bg-[#7DADFA]"
+                } w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
               >
                 <p>2</p>
               </div>
@@ -160,6 +175,9 @@ export default function CreateUser() {
           </section>
         </form>
       </main>
+      {alert && <div className="absolute top-0 w-full h-full flex justify-center items-center">
+        <ConfirmBox success setAlert={setAlert}/>
+      </div>}
     </div>
   );
 }
