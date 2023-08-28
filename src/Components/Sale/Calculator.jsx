@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import {  NavLink } from "react-router-dom";
+import React from "react";
 import { decreaseQty, qtyUpdate } from "../../Feature/Service/recieptSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const Calculator = () => {
+const Calculator = ({ paymentHandler }) => {
   const dispatch = useDispatch();
-  const {
-    reciept,
-    totalPrice,
-    listSelector,
-    activeValue,
-    initialChanged,
-    tax,
-  } = useSelector((state) => state.recieptSlice);
+  const { listSelector, reciept } = useSelector((state) => state.recieptSlice);
 
   return (
     <div className="w-[25.3rem] fixed bottom-0 text-xs bg-[#202124] text-[#f5f5f5]">
@@ -102,8 +94,13 @@ const Calculator = () => {
             value="DEL"
           />
         </div>
-        <div className="flex justify-center border hover:bg-[#3f4245] transition-all active:bg-[#161618] border-[#3f4245] items-center py-3">
-          <NavLink to={"/sale-checkout"}>payment</NavLink>
+        <div
+          onClick={paymentHandler}
+          className={`${
+            reciept?.length == 0 && ` cursor-not-allowed `
+          } flex justify-center border hover:bg-[#3f4245] cursor-pointer transition-all active:bg-[#161618] border-[#3f4245] items-center py-3 `}
+        >
+          payment
         </div>
       </div>
     </div>

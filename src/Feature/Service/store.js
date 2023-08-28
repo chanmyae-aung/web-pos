@@ -6,6 +6,7 @@ import { userApi } from "../API/userApi";
 import userSlice from "./userSlice";
 import { api } from '../API/mediaSlice'
 import { getallProductsApi } from "../API/getallProductsApi";
+import { saleApi } from "../API/saleApi";
 import recieptSlice from "./recieptSlice";
 
 export const store = configureStore({
@@ -16,9 +17,12 @@ export const store = configureStore({
     userSlice: userSlice,
     [getallProductsApi.reducerPath]:getallProductsApi.reducer,
     recieptSlice:recieptSlice,
+    [saleApi.reducerPath]:saleApi.reducer,
     [api.reducerPath]: api.reducer,
     [profileApi.reducerPath] : profileApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware, profileApi.middleware),
+
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware, saleApi.middleware, profileApi.middleware),
+
 });

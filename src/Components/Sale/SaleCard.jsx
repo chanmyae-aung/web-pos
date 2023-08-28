@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addtoReciept } from "../../Feature/Service/recieptSlice";
 
 const SaleCard = ({ pd }) => {
-  console.log(pd);
+  //console.log(pd);
   const dispatch=useDispatch();
   return (
     <div className="mt-1 " onClick={() => dispatch(addtoReciept(pd)) }>

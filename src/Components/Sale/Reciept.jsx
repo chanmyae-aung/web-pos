@@ -1,30 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Calculator from "./Calculator";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { setListSelector } from "../../Feature/Service/recieptSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { clearList, setListSelector, voucherUpdate } from "../../Feature/Service/recieptSlice";
+import { useCheckoutMutation } from "../../Feature/API/saleApi";
+import Cookies from "js-cookie";
+// import Swal from "sweetalert2";
 
 const Reciept = ({ calculator, printBtn }) => {
   const dispatch = useDispatch();
-  const {
-    reciept,
-    totalPrice,
-    listSelector,
-    activeValue,
-    initialChanged,
-    tax,
-  } = useSelector((state) => state.recieptSlice);
+  const { reciept, totalPrice, listSelector, tax,voucherData } = useSelector(
+    (state) => state.recieptSlice
+  );
 
-  const newList = {
-    recieptNew: reciept.map((ele) => {
+  // to POST voucher data
+  const [checkout] = useCheckoutMutation();
+  const token = Cookies.get("token");
+
+  // new list of voucher data to send api,voucher_api is an array from api
+  const newVoucherData = {
+    voucher_records: reciept.map((ele) => {
       return {
-        product_id: ele.id,
+        product_id: ele.product_id,
         quantity: Number(ele.quantity),
       };
     }),
   };
+  console.log(newVoucherData);
 
+  const errorMessage = (error) => {
+    Swal.fire({
+      title: error,
+      icon: 'warning',
+      iconColor: "#E64848",
+      background: "#161618",
+      // showCloseButton: true,
+      confirmButtonColor: '#E64848',
+      confirmButtonText: 'OK'
+    })
+  }
+
+  const navigate=useNavigate();
+  // after voucher done click on the payment button to send data to Api
+  const paymentHandler = async () => {
+    try {
+      const data = await checkout({ token, newVoucherData });
+      console.log(data);
+      if(data?.data?.data){
+        dispatch(voucherUpdate(data?.data));
+        navigate("/sale-reciept")
+        dispatch(clearList());
+      }else if(data?.error){
+        errorMessage(data?.error?.data?.errors?.voucher_records) //pyin ya own ml
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // render when the voucher list select
   const listActiveUpdate = (id) => {
     dispatch(setListSelector(id));
   };
@@ -84,7 +118,7 @@ const Reciept = ({ calculator, printBtn }) => {
         </div>
         {calculator && (
           <div className="h-[50%]  ">
-            <Calculator />
+            <Calculator paymentHandler={paymentHandler} />
           </div>
         )}
         <div className="mt-auto flex flex-col justify-start ">
@@ -95,15 +129,12 @@ const Reciept = ({ calculator, printBtn }) => {
               <h1 className="text-xl font-medium">
                 Total Amount : <span>{totalPrice}</span> MMK
               </h1>
-              <span className="text-sm font-thin">Tax : 5000</span>
+              <span className="text-sm font-thin">Tax : {tax.toFixed(2)}</span>
             </div>
           )}
           {/* Print Button */}
           {printBtn && (
-            <button
-              onClick={printHandler}
-              className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black"
-            >
+            <button className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black">
               Print
             </button>
           )}
