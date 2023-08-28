@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   reciept: [],
   totalPrice: 0,
-  activeValue: null,
+  voucherData: null,
   initialChanged: null,
   tax: 0,
   listSelector: 1,
@@ -57,11 +57,11 @@ export const recieptSlice = createSlice({
         }
       });
     },
-    // for calculator input
-    inputUpdate: (state, { payload }) => {
-      state.activeValue = payload;
+    // for voucher list output which is already sent to API
+    voucherUpdate: (state, { payload }) => {
+      state.voucherData = payload;
     },
-    // while click on list show list.product_id
+    // when click on calculator the qty update on voucher list
     qtyUpdate: (state, { payload }) => {
       state.reciept.map((ele) => {
         if (state.initialChanged && ele.product_id === payload.id) {
@@ -82,6 +82,7 @@ export const recieptSlice = createSlice({
         }
       });
     },
+    // clear voucher list
     clearList: (state) => {
       state.reciept = [];
     },
@@ -91,7 +92,7 @@ export const {
   addtoReciept,
   qtyUpdate,
   decreaseQty,
-  inputUpdate,
+  voucherUpdate,
   clearList,
   setListSelector,
 } = recieptSlice.actions;

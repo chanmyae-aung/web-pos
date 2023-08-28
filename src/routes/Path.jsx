@@ -21,6 +21,7 @@ import Checkout from "../Pages/Sale/Checkout";
 import EditUser from "../Pages/user/EditUser";
 import ProductDetail from "../Pages/Inventory/ProductDetail";
 import ProductEditing from "../Pages/Inventory/ProductEditing";
+import RecieptData from "../Pages/Sale/RecieptData";
 
 
 export default function Path() {
@@ -52,6 +53,7 @@ export default function Path() {
         
         </Route>
         <Route path="sale-cashier" element={<Cashier/>}/>
+        <Route path="/sale-reciept" element={<RecieptData/>}/>
         <Route path="/sale-checkout" element={<Checkout/>}/>
         <Route path="login" element={<AuthenticatedGuard><Login /></AuthenticatedGuard>} />
         <Route path="/*" element={<Error/>}/>
