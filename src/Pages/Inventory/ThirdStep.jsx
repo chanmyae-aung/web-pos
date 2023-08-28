@@ -19,7 +19,7 @@ const ThirdStep = () => {
         const imageUrl = URL.createObjectURL(file); // Create a temporary URL for the selected image
   
         // Dispatch the URL
-        dispatch(addProductPhoto({ photo: file }));
+        dispatch(addProductPhoto({ photo: imageUrl }));
   
         // Set the image source to display the selected image
         setImageSrc(imageUrl);

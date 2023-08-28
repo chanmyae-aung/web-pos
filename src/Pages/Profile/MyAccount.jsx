@@ -6,8 +6,11 @@ import { BiSolidUser } from "react-icons/bi";
 import Breadcrumb from "../../Components/Breadcrumb";
 import Personal from "../../Components/Profile/Personal";
 import LoginInfo from "../../Components/Profile/LoginInfo";
+import { useGetProfileQuery } from "../../Feature/API/profileApi";
+import Cookies from "js-cookie";
 
 export default function MyAccount() {
+  const token = Cookies.get("token")
   const editImage = document.querySelector(".file");
   const [state, setState] = useState({
     personal: true,
@@ -35,6 +38,8 @@ export default function MyAccount() {
       password: true,
     });
   };
+
+  const {data} = useGetProfileQuery(token)
   return (
     <div className={`w-full`}>
       {/* path breadcrumbs */}
@@ -56,8 +61,8 @@ export default function MyAccount() {
               className={`w-40 h-40 absolute -top-16 rounded-full border p-1 flex justify-center items-center`}
             >
               <img
-                className={`w-full`}
-                src={`https://img.icons8.com/?size=512&id=108652&format=png`}
+                className={`w-full h-full rounded-full`}
+                src={data?.user.user_photo}
                 alt=""
               />
               <div
@@ -70,7 +75,7 @@ export default function MyAccount() {
             </div>
             <div className={`flex items-center justify-between mx-10 ml-52`}>
               <div className={``}>
-                <h2>Ethan James</h2>
+                <h2>{data?.user.name}</h2>
                 <p>Sale Executive</p>
               </div>
               <div className="flex items-center gap-5">
@@ -114,12 +119,12 @@ export default function MyAccount() {
             </div>
             {state.personal && (
               <div>
-                <Personal />
+                <Personal data={data} />
               </div>
             )}
             {state.login && (
               <div>
-                <LoginInfo />
+                <LoginInfo data={data}/>
               </div>
             )}
           </div>

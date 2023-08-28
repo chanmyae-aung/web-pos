@@ -3,12 +3,17 @@ import { MdOutlineEdit } from "react-icons/md";
 import { TbMailOpenedFilled } from "react-icons/tb";
 import { FaPhoneVolume } from "react-icons/fa";
 import { BiSolidUser } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb";
+import Cookies from "js-cookie";
+import { useGetSingleUserQuery } from "../../Feature/API/userApi";
 
 
 export default function UserDetail() {
+  const {id} = useParams()
   const editImage = document.querySelector(".file");
+  const token = Cookies.get("token")
+  const {data} = useGetSingleUserQuery({token, id})
   return (
     <div className={`w-full`}>
     {/* path breadcrumbs */}
@@ -23,8 +28,8 @@ export default function UserDetail() {
             className={`w-40 h-40 absolute -top-16 rounded-full border p-1 flex justify-center items-center`}
           >
             <img
-              className={`w-full`}
-              src={`https://img.icons8.com/?size=512&id=108652&format=png`}
+              className={`w-full h-full object-cover rounded-full`}
+              src={data?.user.user_photo}
               alt=""
             />
             <div
@@ -37,7 +42,7 @@ export default function UserDetail() {
           </div>
           <div className={`flex items-center justify-between mx-10 ml-52`}>
             <div className={``}>
-              <h2>Ethan James</h2>
+              <h2>{data?.user.name}</h2>
               <p>Sale Executive</p>
             </div>
             <div className="flex items-center gap-5">
@@ -71,23 +76,23 @@ export default function UserDetail() {
           <div className="px-10 py-5 flex flex-col gap-5 bg-[#1a1a1a]">
               <div className="flex">
                 <p className="w-[30%]">Phone</p>
-                <p className="w-[70%]">: 0987654321</p>
+                <p className="w-[70%]">: {data?.user.phone}</p>
               </div>
               <div className="flex">
                 <p className="w-[30%]">Email</p>
-                <p className="w-[70%]">: ethan@gmail.com</p>
+                <p className="w-[70%]">: {data?.user.email}</p>
               </div>
               <div className="flex">
                 <p className="w-[30%]">Address</p>
-                <p className="w-[70%]">: No.2, Baho Street, Bahan, Yangon</p>
+                <p className="w-[70%]">: {data?.user.address}</p>
               </div>
               <div className="flex">
                 <p className="w-[30%]">Gender</p>
-                <p className="w-[70%]">: Male</p>
+                <p className="w-[70%]">: {data?.user.gender}</p>
               </div>
               <div className="flex">
                 <p className="w-[30%]">Date of Birth</p>
-                <p className="w-[70%]">: 11/11/1999</p>
+                <p className="w-[70%]">: {data?.user.date_of_birth}</p>
               </div>
             </div>
         </div>

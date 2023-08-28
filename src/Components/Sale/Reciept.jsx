@@ -1,23 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Calculator from "./Calculator";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { listActiveUpdate } from "../../Feature/Service/recieptSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { clearList, setListSelector, voucherUpdate } from "../../Feature/Service/recieptSlice";
+import { useCheckoutMutation } from "../../Feature/API/saleApi";
+import Cookies from "js-cookie";
+// import Swal from "sweetalert2";
 
 const Reciept = ({ calculator, printBtn }) => {
-  const { reciept, qty, totalPrice, activeValue, listActive } = useSelector(
+  const dispatch = useDispatch();
+  const { reciept, totalPrice, listSelector, tax,voucherData } = useSelector(
     (state) => state.recieptSlice
   );
-  console.log(reciept); // selected_items
-  console.log(activeValue); // calculator input
-  console.log(listActive); // product_id
 
-  const dispatch = useDispatch();
+  // to POST voucher data
+  const [checkout] = useCheckoutMutation();
+  const token = Cookies.get("token");
 
-  useEffect(() => {}, [activeValue]);
+  // new list of voucher data to send api,voucher_api is an array from api
+  const newVoucherData = {
+    voucher_records: reciept.map((ele) => {
+      return {
+        product_id: ele.product_id,
+        quantity: Number(ele.quantity),
+      };
+    }),
+  };
+  console.log(newVoucherData);
 
-  
+  const errorMessage = (error) => {
+    Swal.fire({
+      title: error,
+      icon: 'warning',
+      iconColor: "#E64848",
+      background: "#161618",
+      // showCloseButton: true,
+      confirmButtonColor: '#E64848',
+      confirmButtonText: 'OK'
+    })
+  }
+
+  const navigate=useNavigate();
+  // after voucher done click on the payment button to send data to Api
+  const paymentHandler = async () => {
+    try {
+      const data = await checkout({ token, newVoucherData });
+      console.log(data);
+      if(data?.data?.data){
+        dispatch(voucherUpdate(data?.data));
+        navigate("/sale-reciept")
+        dispatch(clearList());
+      }else if(data?.error){
+        errorMessage(data?.error?.data?.errors?.voucher_records) //pyin ya own ml
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // render when the voucher list select
+  const listActiveUpdate = (id) => {
+    dispatch(setListSelector(id));
+  };
 
   const printHandler = () => {
     window.print();
@@ -42,35 +86,29 @@ const Reciept = ({ calculator, printBtn }) => {
             {reciept?.map((item) => {
               return (
                 <Link
-                  onClick={() => dispatch(listActiveUpdate(item))}
+                  onClick={(e) => listActiveUpdate(item?.product_id)}
                   key={item?.product_id}
                   className="mt-5  px-4 pt-2 mx-auto overflow-visible"
                 >
                   <div className="flex justify-between border-b mb-1 pb-2 border-gray-600">
                     <div className="flex flex-col">
                       <p
-                        className={
-                          listActive == item?.product_id
-                            ? `font-semibold text-blue-500 leading-loose tracking-wider text-[1rem]`
-                            : ` font-semibold leading-loose tracking-wider text-[1rem]`
-                        }
+                        className={`${
+                          listSelector == item?.product_id && "text-blue-600"
+                        } font-semibold leading-loose tracking-wider text-[1rem] `}
                       >
                         {item?.name.slice(0, 7)}
                       </p>
                       <span className="text-[0.8rem] font-thin">
                         <span className="mr-2">
-                          {/* {listActive === item?.product_id ? `${activeValue}`: `${item?.quantity}`} */}
-                          {/* {item?.quantity} */}
-                          {item?.quantity}
+                          {item?.quantity == "" ? "0" : item?.quantity}
                           pcs
                         </span>
                         <span>{item?.sale_price} MMK</span>
                       </span>
                     </div>
                     <span className="text-semibold">
-                      {listActive === item?.product_id
-                        ? `${activeValue * item?.sale_price} `
-                        : `${item?.quantity * item?.sale_price} `}
+                      {Number(item?.quantity) * item?.sale_price}
                     </span>
                   </div>
                 </Link>
@@ -80,7 +118,7 @@ const Reciept = ({ calculator, printBtn }) => {
         </div>
         {calculator && (
           <div className="h-[50%]  ">
-            <Calculator activeValue={activeValue} />
+            <Calculator paymentHandler={paymentHandler} />
           </div>
         )}
         <div className="mt-auto flex flex-col justify-start ">
@@ -91,15 +129,12 @@ const Reciept = ({ calculator, printBtn }) => {
               <h1 className="text-xl font-medium">
                 Total Amount : <span>{totalPrice}</span> MMK
               </h1>
-              <span className="text-sm font-thin">Tax : 5000</span>
+              <span className="text-sm font-thin">Tax : {tax.toFixed(2)}</span>
             </div>
           )}
           {/* Print Button */}
           {printBtn && (
-            <button
-              onClick={printHandler}
-              className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black"
-            >
+            <button className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black">
               Print
             </button>
           )}
