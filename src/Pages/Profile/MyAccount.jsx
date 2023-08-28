@@ -60,8 +60,8 @@ export default function MyAccount() {
               className={`w-40 h-40 absolute -top-16 rounded-full border p-1 flex justify-center items-center`}
             >
               <img
-                className={`w-full`}
-                src={`https://img.icons8.com/?size=512&id=108652&format=png`}
+                className={`w-full h-full rounded-full`}
+                src={data?.user.user_photo}
                 alt=""
               />
               <div

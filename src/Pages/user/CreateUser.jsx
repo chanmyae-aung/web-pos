@@ -146,7 +146,7 @@ export default function CreateUser() {
             <div className="border-l py-5 ml-5"></div>
             <div className="flex items-center gap-3 my-3">
               <div
-                className={`w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
+                className={`${state.createStep && "bg-[#7DADFA]"} w-10 h-10 border rounded-full p-1 flex items-center justify-center`}
               >
                 <p>3</p>
               </div>
