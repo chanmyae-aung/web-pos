@@ -41,11 +41,13 @@ const Mediapgwpic = (props) => {
   const [expandedImageId, setExpandedImageId] = useState(null); //expanded image state
   const [displayState, setDisplayState] = useState(false); //toggle view state
   const [displayState2, setDisplayState2] = useState(false); //toggle view sttae
+  const [pictures,setPictures]=useState([]);
  
   //func that upload media from dropzone
   const handleDropzoneUpload = async (acceptedFiles) => {
     try {
       console.log(acceptedFiles);
+      
       const photos = new FormData();
       for (let i = 0; i < acceptedFiles.length; i++) {
         photos.append("photos[]", acceptedFiles[i], acceptedFiles[i].name);
@@ -68,7 +70,8 @@ const Mediapgwpic = (props) => {
       console.error("An error occurred:", error);
     }
   };
-  const images = mediaData?.data; //inserting retrieved arr from server into a veraible
+  const images = mediaData?.data; 
+  console.log(images);//inserting retrieved arr from server into a veraible
   //data within the table
   const rows = images?.map((element) => {
     let date_time = element.updated_at.split("T");

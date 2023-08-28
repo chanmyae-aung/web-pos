@@ -1,8 +1,37 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Button from '../../Components/Button'
 import { MdOutlineEdit } from 'react-icons/md'
+import { useDispatch } from 'react-redux';
+import { addProductPhoto } from '../../Feature/Service/productSlice';
 const ThirdStep = () => {
-    const editImage = document.querySelector(".file")
+  const fileInputRef = useRef(null);
+    const dispatch=useDispatch();
+    const [imageSrc, setImageSrc] = useState('');
+    const handleEditClick = () => {
+      // Programmatically trigger the file input's click event
+      fileInputRef.current.click();
+    };
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      console.log(file);
+      if (file) {
+        // Dispatch only the file itself or its URL as needed
+        const imageUrl = URL.createObjectURL(file); // Create a temporary URL for the selected image
+  
+        // Dispatch the URL
+        dispatch(addProductPhoto({ photo: file }));
+  
+        // Set the image source to display the selected image
+        setImageSrc(imageUrl);
+        // Set the image source to display the selected image
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageUrl = event.target.result;
+          setImageSrc(imageUrl);
+        };
+        reader.readAsDataURL(file);
+      }
+    };  
   return (
     <div>
     <section
@@ -15,15 +44,16 @@ const ThirdStep = () => {
             >
               <img
                 className={`w-full`}
-                src={`https://cdn-icons-png.flaticon.com/512/8787/8787106.png`}
+                src={imageSrc || 'https://cdn-icons-png.flaticon.com/512/8787/8787106.png'}
                 alt=""
               />
               <div
-                onClick={() => editImage.click()}
-                className={`flex justify-center cursor-pointer absolute bg-[#202124] right-3  bottom-1 items-center text-xs gap-1 border-2 rounded-full w-8 h-8 px-1 py-0.5`}
+               onClick={handleEditClick}
+                className={` file flex justify-center cursor-pointer absolute bg-[#202124] right-3  bottom-1 items-center text-xs gap-1 border-2 rounded-full w-8 h-8 px-1 py-0.5`}
               >
                 <MdOutlineEdit />
-                <input className="file hidden" type="file" name="" id="" />
+                <input  ref={fileInputRef}
+                onChange={handleFileChange} className="file hidden" type="file" name="" id="" />
               </div>
             </div>
             <div className="my-10">

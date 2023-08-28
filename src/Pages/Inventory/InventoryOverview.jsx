@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
-import { Input, NumberInput, Select, Table, TextInput, Textarea } from "@mantine/core";
+import {
+  Input,
+  NumberInput,
+  Select,
+  Table,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
 import { FiSearch } from "react-icons/fi";
-import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button, Group,useMantineTheme } from '@mantine/core';
-
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Button, Group, useMantineTheme } from "@mantine/core";
 
 import {
   AiOutlineOrderedList,
@@ -15,9 +21,11 @@ import { BsFillGridFill } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiCopyDuotone } from "react-icons/pi";
 import { IoMdAdd } from "react-icons/io";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const InventoryOverview = () => {
+  const nav = useNavigate();
+  
   const [opened, { open, close }] = useDisclosure(false);
   const theme = useMantineTheme();
   const [displayState, setDisplayState] = useState(false);
@@ -58,19 +66,23 @@ const InventoryOverview = () => {
       filesize: "20",
       action: (
         <div className="  flex  ">
-          <Group >
+          <Group>
             <Button onClick={open}>
-            
               <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
             </Button>
           </Group>
           <Group position="center">
-        <Button> <AiFillEdit className="cursor-pointer hover:text-blue-700" /></Button>
-      </Group>
-      <Group position="center">
-        <Button > <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" /></Button>
-      </Group>
-         
+            <Button>
+              {" "}
+              <AiFillEdit className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
         </div>
       ),
     },
@@ -83,19 +95,23 @@ const InventoryOverview = () => {
       filesize: "20",
       action: (
         <div className="  flex  ">
-          <Group >
+          <Group>
             <Button onClick={open}>
-            
               <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
             </Button>
           </Group>
           <Group position="center">
-        <Button> <AiFillEdit className="cursor-pointer hover:text-blue-700" /></Button>
-      </Group>
-      <Group position="center">
-        <Button > <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" /></Button>
-      </Group>
-         
+            <Button>
+              {" "}
+              <AiFillEdit className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
         </div>
       ),
     },
@@ -108,20 +124,24 @@ const InventoryOverview = () => {
       filesize: "20",
       action: (
         <div className="  flex  ">
-        <Group >
-          <Button onClick={open}>
-          
-            <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
-          </Button>
-        </Group>
-        <Group position="center">
-      <Button> <AiFillEdit className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-    <Group position="center">
-      <Button > <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-       
-      </div>
+          <Group>
+            <Button onClick={open}>
+              <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiFillEdit className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+        </div>
       ),
     },
     {
@@ -133,20 +153,24 @@ const InventoryOverview = () => {
       filesize: "20",
       action: (
         <div className="  flex  ">
-        <Group >
-          <Button onClick={open}>
-          
-            <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
-          </Button>
-        </Group>
-        <Group position="center">
-      <Button> <AiFillEdit className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-    <Group position="center">
-      <Button > <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-       
-      </div>
+          <Group>
+            <Button onClick={open}>
+              <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiFillEdit className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+        </div>
       ),
     },
     {
@@ -158,20 +182,24 @@ const InventoryOverview = () => {
       filesize: "20",
       action: (
         <div className="  flex  ">
-        <Group >
-          <Button onClick={open}>
-          
-            <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
-          </Button>
-        </Group>
-        <Group position="center">
-      <Button> <AiFillEdit className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-    <Group position="center">
-      <Button > <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" /></Button>
-    </Group>
-       
-      </div>
+          <Group>
+            <Button onClick={open}>
+              <IoMdAdd className=" cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiFillEdit className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+          <Group position="center">
+            <Button>
+              {" "}
+              <AiOutlineArrowRight className="cursor-pointer hover:text-blue-700" />
+            </Button>
+          </Group>
+        </div>
       ),
     },
   ];
@@ -189,24 +217,28 @@ const InventoryOverview = () => {
 
   return (
     <div>
-             <Modal className=" mdbox" opened={opened} onClose={close} title="Add Stock">
-       
+      <Modal
+        className=" mdbox"
+        opened={opened}
+        onClose={close}
+        title="Add Stock"
+      >
         <NumberInput
-        defaultValue={0}
+          defaultValue={0}
           data-autofocus
           withAsterisk
           label="Quantity"
           placeholder="Enter quantity"
           mt="md"
         />
-         <Textarea label="More" placeholder=" Enter more " />
-         <Button className=" " variant="outline" >
-            Add Stock
-          </Button>
+        <Textarea label="More" placeholder=" Enter more " />
+        <Button className=" " variant="outline">
+          Add Stock
+        </Button>
       </Modal>
       <div className=" flex justify-between items-center">
         <Breadcrumb
-        showBtn={false}
+          showBtn={false}
           title={"Products"}
           firstRoute={"Inventory"}
           secondRoute={"Products"}
@@ -215,11 +247,15 @@ const InventoryOverview = () => {
           <button className=" hover:border-blue-300 hover:text-white mx-8 px-6 py-2   font-bold  border  border-white rounded-sm text-blue-300 ">
             Go to shop
           </button>
-         <Link  >
-         <button className=" hover:opacity-80 px-6 py-2   font-bold  border  rounded-sm text-black bg-blue-300 ">
+
+          <button
+            onClick={() => {
+              nav("/adding-product");
+            }}
+            className=" hover:opacity-80 px-6 py-2   font-bold  border  rounded-sm text-black bg-blue-300 "
+          >
             + Add Product
           </button>
-         </Link>
         </div>
       </div>
       <div>

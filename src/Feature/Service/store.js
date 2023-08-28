@@ -6,6 +6,8 @@ import userSlice from "./userSlice";
 import { api } from '../API/mediaSlice'
 import { getallProductsApi } from "../API/getallProductsApi";
 import recieptSlice from "./recieptSlice";
+import { productApi } from "../API/productApi";
+import productSlice from "./productSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,10 +15,12 @@ export const store = configureStore({
     authSlice: authSlice,
     [userApi.reducerPath]: userApi.reducer,
     userSlice: userSlice,
+    [productApi.reducerPath]: productApi.reducer,
+    productSlice: productSlice,
     [getallProductsApi.reducerPath]:getallProductsApi.reducer,
     recieptSlice:recieptSlice,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware,productApi.middleware),
 });
