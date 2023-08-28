@@ -10,14 +10,13 @@ const Recent = () => {
   const token = Cookies.get("token");
 
   const recordedVoucher = useRecordedVoucherQuery(token);
-  console.log(recordedVoucher?.currentData?.data);
+  //console.log(recordedVoucher?.currentData?.data);
   const oldData = recordedVoucher?.currentData?.data;
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totals=oldData?.map((eachData)=>eachData?.net_total)
-  console.log(totals);
-  
+  const totals = oldData?.map((eachData) => eachData?.net_total);
+  //console.log(totals);
 
   return (
     <>
@@ -50,6 +49,7 @@ const Recent = () => {
               <th>User</th>
             </tr>
           </thead>
+          {/* map data from old recorded voucher list from api */}
           <tbody className="text-[#f5f5f5]">
             {oldData?.map((data, i) => {
               return (
@@ -67,7 +67,7 @@ const Recent = () => {
           </tbody>
         </Table>
       </main>
-
+       {/* pagination */}
       <div className="">
         <Pagination
           setCurrentPage={setCurrentPage}
@@ -75,10 +75,12 @@ const Recent = () => {
           last_page={"5"}
         />
       </div>
+      {/* total and tax */}
       <div>
-        <p className="flex gap-3">
+        <p className="flex gap-3 pb-5">
           <span>Total sale this month: </span>
-          <span>{totals?.reduce((pv,cv)=>pv+cv,0)} MMK</span></p>
+          <span>{totals?.reduce((pv, cv) => pv + cv, 0).toFixed(2)} MMK</span>
+        </p>
       </div>
     </>
   );

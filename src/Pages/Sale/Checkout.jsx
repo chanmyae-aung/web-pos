@@ -1,12 +1,13 @@
 import React from "react";
-import Reciept from "../../Components/Sale/Reciept";
+// import Reciept from "../../Components/Sale/Reciept";
 import NavBar from "../../Components/Sidebar/NavBar";
 import { NavLink } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 import { BsCashCoin, BsCreditCard, BsCreditCard2Back } from "react-icons/bs";
 import { HiArrowSmLeft } from "react-icons/hi";
+import RecieptData from "./RecieptData";
 
-const Checkout = ({ calculator, printBtn,cardAdd,setCardAdd }) => {
+const Checkout = () => {
   
   return (
     <>
@@ -58,7 +59,7 @@ const Checkout = ({ calculator, printBtn,cardAdd,setCardAdd }) => {
         </div>
 
         <div className=" border-l mt-12 vendorListHeading print:bg-black   w-1/3">
-          <Reciept calculator={false} printBtn={true} cardAdd={cardAdd} setCardAdd={setCardAdd} />
+          <RecieptData  />
         </div>
       </div>
     </>

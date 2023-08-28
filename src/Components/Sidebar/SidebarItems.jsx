@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Accordion } from "@mantine/core";
 import { BiHome } from "react-icons/bi";
 import { TbClipboardText } from "react-icons/tb";
-import { PiUserCirclePlusBold, PiUserSquareFill } from "react-icons/pi";
+import {
+  PiUserCirclePlusBold,
+  PiUserSquareFill,
+  PiChartDonut,
+  PiCoinsBold,
+} from "react-icons/pi";
 import { TfiGallery } from "react-icons/tfi";
 import { HiOutlineLogout } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -12,21 +17,20 @@ import { removeUser } from "../../Feature/Service/authSlice";
 import Cookies from "js-cookie";
 
 const SidebarItems = () => {
-  const nav=useNavigate();
-  const user=JSON.stringify(Cookies.get("user"));
-  const token=Cookies.get("token");
-  const [logout]=useLogoutMutation(token);
-  const dispatch=useDispatch();
-const logoutHandler=async()=>{
-  const {data}=await logout(token);
-  if(data?.message ==="logout successful"){
-    //dispatch(removeUser());
-    nav("/login");
-  }
-  dispatch(removeUser());
-  console.log(data);
-
-}
+  const nav = useNavigate();
+  const user = JSON.stringify(Cookies.get("user"));
+  const token = Cookies.get("token");
+  const [logout] = useLogoutMutation(token);
+  const dispatch = useDispatch();
+  const logoutHandler = async () => {
+    const { data } = await logout(token);
+    if (data?.message === "logout successful") {
+      //dispatch(removeUser());
+      nav("/login");
+    }
+    dispatch(removeUser());
+    console.log(data);
+  };
   return (
     <>
       {/* accordion control on sidebar */}
@@ -39,10 +43,10 @@ const logoutHandler=async()=>{
             // paddingTop:"5px"
           },
           panel: {
-            ":active":{
-              color:"#3F4245"
+            ":active": {
+              color: "#3F4245",
             },
-            paddingTop:"5px",
+            paddingTop: "4px",
           },
 
           control: {
@@ -89,14 +93,16 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel className="">
-            <NavLink to={"sale-cashier"}
+            <NavLink
+              to={"sale-cashier"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Cashier
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel>
-            <NavLink to={'sale-recent'}
+            <NavLink
+              to={"sale-recent"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }
@@ -116,14 +122,16 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel>
-            <NavLink to={"inventory-overview"}
+            <NavLink
+              to={"inventory-overview"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Products
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel>
-            <NavLink to={"adding-product"}
+            <NavLink
+              to={"adding-product"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Add Products
@@ -144,6 +152,72 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
         </Accordion.Item>
+        {/* Report */}
+        <Accordion.Item value="Report">
+          <Accordion.Control>
+            <span className=" inline-flex gap-3 my-0 py-0">
+              <i className="">
+                <PiChartDonut className="mt-1" />
+              </i>
+              Report{" "}
+            </span>
+          </Accordion.Control>
+          <Accordion.Panel className="">
+            <NavLink
+              className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
+            >
+              Stock
+            </NavLink>
+          </Accordion.Panel>
+          <Accordion.Panel>
+            <NavLink
+              className={
+                "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
+              }
+            >
+              Sale
+            </NavLink>
+          </Accordion.Panel>
+        </Accordion.Item>
+        {/* finance */}
+        <Accordion.Item value="Finance">
+          <Accordion.Control>
+            <span className="inline-flex gap-3 my-0 py-0">
+              <i>
+                <PiCoinsBold className="mt-1" />
+              </i>{" "}
+              Finance
+            </span>
+          </Accordion.Control>
+          <Accordion.Panel>
+            <NavLink
+              className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
+            >
+              Daily
+            </NavLink>
+          </Accordion.Panel>
+          <Accordion.Panel>
+            <NavLink
+              className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
+            >
+              Monthly
+            </NavLink>
+          </Accordion.Panel>
+          <Accordion.Panel>
+            <NavLink
+              className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
+            >
+              Yearly
+            </NavLink>
+          </Accordion.Panel>
+          <Accordion.Panel>
+            <NavLink
+              className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
+            >
+              Custom
+            </NavLink>
+          </Accordion.Panel>
+        </Accordion.Item>
         {/* User */}
         <Accordion.Item value="User">
           <Accordion.Control>
@@ -155,16 +229,16 @@ const logoutHandler=async()=>{
             </span>
           </Accordion.Control>
           <Accordion.Panel>
-            <NavLink 
-            to={'user-overview'}
+            <NavLink
+              to={"user-overview"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
-              
             >
               Overview
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel className="">
-            <NavLink to={'/create-user'}
+            <NavLink
+              to={"/create-user"}
               className={`pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2`}
             >
               Create User
@@ -177,7 +251,7 @@ const logoutHandler=async()=>{
             chevron=" "
             className="px-5 active:bg-[#3F4245]  text-[#f5f5f5] text-[1rem]  pt-1 pb-2"
           >
-            <NavLink to={'media-gallery'} >
+            <NavLink to={"media-gallery"}>
               <span className="inline-flex gap-3 my-0 py-0">
                 <i>
                   <TfiGallery className="mt-1" />
@@ -200,7 +274,8 @@ const logoutHandler=async()=>{
           </Accordion.Control>
 
           <Accordion.Panel className="px-2 py-0  text-[1rem]">
-            <NavLink to={"/my-account"}
+            <NavLink
+              to={"/my-account"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }
@@ -209,7 +284,8 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
           <Accordion.Panel className="px-2 py-0  text-[1rem]">
-            <NavLink to={"/edit-profile"}
+            <NavLink
+              to={"/edit-profile"}
               className={
                 "pt-1 pb-2 border-s-2 border-[#3f4245] hover:text-blue-400 cursor-pointer text-[#f5f5f5]  px-2"
               }
@@ -218,7 +294,8 @@ const logoutHandler=async()=>{
             </NavLink>
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item value="login">
+        {/* logout */}
+        <Accordion.Item value="logOut">
           <Accordion.Control
             chevron=" "
             className="px-5 active:bg-[#3F4245]  text-[#f5f5f5] text-[1rem]  pt-1 pb-2"
