@@ -6,6 +6,8 @@ import SaleCard from "../../Components/Sale/SaleCard";
 import { useGetallProductsQuery } from "../../Feature/API/getallProductsApi";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
 
 const Cashier = () => {
   const token = Cookies.get("token")
@@ -15,7 +17,11 @@ const Cashier = () => {
   return (
     <>
       <div className="bg-[#202124] text-[#f5f5f5] w-full h-screen overflow-auto ">
-        <h1 className="px-2 w-full py-2 border-b">POS CASHIER</h1>
+        {/* nav to / */}
+        <NavLink to={"/"}>
+        <h1 className="px-2 w-full py-2 flex text-xl bg-[#3F4245] justify-between border-b border-gray-700">MMS POS
+        </h1>
+        </NavLink>
         <div className="flex gap-2">
           {/* receipt section 1 (bought product list) */}
 
@@ -75,7 +81,7 @@ const Cashier = () => {
 
           {/* reciept section 2 (calculator) */}
           <div className="w-[30%] h-full border-l border-[#3f4245]">
-            <Reciept calculator={true} printBtn={false}  />
+            <Reciept  />
           </div>
         </div>
       </div>
