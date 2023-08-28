@@ -15,6 +15,7 @@ import Recent from "../Pages/Sale/Recent";
 import InventoryOverview from "../Pages/Inventory/InventoryOverview";
 import Cashier from "../Pages/Sale/Cashier";
 import MyAccount from "../Pages/Profile/MyAccount";
+import EditProfile from "../Pages/Profile/EditProfile";
 import AddProduct from "../Pages/Inventory/AddProduct";
 import BannedUser from "../Pages/user/BannedUser";
 import Checkout from "../Pages/Sale/Checkout";
@@ -38,10 +39,11 @@ export default function Path() {
         >
           <Route index element={<Dashboard />} />
           <Route path="my-account" element={<MyAccount />} />
-          <Route path="edit-user" element={<EditUser />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="edit-user/:id" element={<EditUser />} />
           <Route path="user-overview" element={<UserList />} />
           <Route path="banned-user" element={<BannedUser />} />
-          <Route path="user-detail" element={<UserDetail />} />
+          <Route path="user-detail/:id" element={<UserDetail />} />
           <Route path="create-user" element={<CreateUser />} />
           <Route path="update-user" element={<UpdateUser />} />
           <Route path="media-gallery" element={<Mediapgwpic />} />

@@ -25,7 +25,44 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["userApi"],
     }),
+    getSingleUser: builder.query({
+      query: ({ token, id }) => ({
+        url: `/users/${id}`,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }),
+      providesTags: ["userApi"],
+    }),
+    updateUser: builder.mutation({
+      query: ({ token, id, updateUserData }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
+        body: updateUserData,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ["userApi"],
+    }),
+    deleteUser: builder.mutation({
+      query: ({ token, id }) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ["userApi"],
+    }),
+    
   }),
 });
 
-export const { useGetAllUsersQuery, useCreateUserMutation } = userApi;
+export const {
+  useGetAllUsersQuery,
+  useCreateUserMutation,
+  useGetSingleUserQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} = userApi;

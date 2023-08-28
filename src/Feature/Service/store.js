@@ -1,5 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { authApi } from "../API/authApi";
+import { profileApi } from "../API/profileApi";
 import authSlice from "./authSlice";
 import { userApi } from "../API/userApi";
 import userSlice from "./userSlice";
@@ -18,7 +19,10 @@ export const store = configureStore({
     recieptSlice:recieptSlice,
     [saleApi.reducerPath]:saleApi.reducer,
     [api.reducerPath]: api.reducer,
+    [profileApi.reducerPath] : profileApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware,saleApi.middleware),
+
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware,api.middleware,getallProductsApi.middleware, saleApi.middleware, profileApi.middleware),
+
 });
