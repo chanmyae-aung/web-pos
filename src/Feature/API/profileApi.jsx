@@ -14,51 +14,20 @@ export const profileApi = createApi({
       }),
       providesTags: ["profileApi"],
     }),
-    createUser: builder.mutation({
-      query: ({ token, userData }) => ({
-        url: "/register",
-        method: "POST",
-        body: userData,
+    updateProfile: builder.mutation({
+      query: ({ token, updateProfileData }) => ({
+        url: `/profile`,
+        method: "PATCH",
+        body:  updateProfileData,
         headers: {
           authorization: `Bearer ${token}`,
         },
       }),
       invalidatesTags: ["profileApi"],
-    }),
-    getSingleUser: builder.query({
-      query: ({ token, id }) => ({
-        url: `/users/${id}`,
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }),
-      providesTags: ["profileApi"],
-    }),
-    updateUser: builder.mutation({
-      query: ({ token, id }) => ({
-        url: `/users/${id}`,
-        method: "PUT",
-        body: updateUserData,
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }),
-      invalidatesTags: ["profileApi"],
-    }),
-    deleteUser: builder.mutation({
-      query: ({ token, id }) => ({
-        url: `/users/${id}`,
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }),
-      invalidatesTags: ["profileApi"],
-    }),
-    
+    }),    
   }),
 });
 
 export const {
-  useGetProfileQuery,
+  useGetProfileQuery, useUpdateProfileMutation
 } = profileApi;

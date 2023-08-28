@@ -35,9 +35,9 @@ export const userApi = createApi({
       providesTags: ["userApi"],
     }),
     updateUser: builder.mutation({
-      query: ({ token, id }) => ({
+      query: ({ token, id, updateUserData }) => ({
         url: `/users/${id}`,
-        method: "PUT",
+        method: "PATCH",
         body: updateUserData,
         headers: {
           authorization: `Bearer ${token}`,
