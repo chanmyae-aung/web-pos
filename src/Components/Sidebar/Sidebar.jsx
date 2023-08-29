@@ -1,12 +1,14 @@
 import { AppShell, Navbar, Header } from "@mantine/core";
 import NavBar from "./NavBar";
 import SidebarItems from "./SidebarItems";
-import Mediapgwpic from "../../Pages/Media/Mediapgwpic";
 
 export default function Sidebar({ children }) {
   return (
     <AppShell
+    
+
       padding="md"
+      
       //drawer sidebar here
       navbar={
         <Navbar
@@ -15,6 +17,7 @@ export default function Sidebar({ children }) {
           p="xs"
           bg={"#161618"}
           withBorder={0}
+        
         >
           {<SidebarItems />}
         </Navbar>

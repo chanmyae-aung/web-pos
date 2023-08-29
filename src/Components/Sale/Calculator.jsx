@@ -7,7 +7,7 @@ const Calculator = ({ paymentHandler }) => {
   const { listSelector, reciept } = useSelector((state) => state.recieptSlice);
 
   return (
-    <div className="w-[25.3rem] fixed bottom-0 text-xs bg-[#202124] text-[#f5f5f5]">
+    <div className=" calc-width    fixed bottom-0 text-xs bg-[#202124] text-[#f5f5f5]">
       <div className="flex flex-col">
         <div className="flex justify-center tableUi border border-[#3f4245]">
           <input id="note" className="" type="button" value="Note" />

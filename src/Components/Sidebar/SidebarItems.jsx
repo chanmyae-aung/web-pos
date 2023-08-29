@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion } from "@mantine/core";
+import { Accordion,ScrollArea } from "@mantine/core";
 import { BiHome } from "react-icons/bi";
 import { TbClipboardText } from "react-icons/tb";
 import {
@@ -35,8 +35,10 @@ const SidebarItems = () => {
     <>
       {/* accordion control on sidebar */}
       <Accordion
+        component={ScrollArea}        
         id="sidebar"
-        transitionDuration={1000}
+        transitionDuration={700}
+        sx={{overflow:"scroll"}}
         styles={{
           item: {
             border: "0",

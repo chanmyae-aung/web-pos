@@ -56,10 +56,29 @@ h4 {
 } */
 
 .btnUi #one-fourth-btns{
-  @apply w-1/4 border-r border-[#3f4245] text-center hover:bg-[#3f4245] transition-all  py-4
+@apply w-1/4 border-r border-[#3f4245] text-center hover:bg-[#3f4245] transition-all  py-4
 }
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+ 
+@media (min-width: 1536px)  {
+  .calc-width{
+    width: 31.7rem ;
+  }
+ }
+ @media screen and  (min-width: 1280px) and (max-width:1536px) {
+  .calc-width{
+    width: 28.3rem ;
+  }
+ }
+
+@media screen and  (min-width:1024px) and (max-width:1366px){
+  .calc-width{
+    width: 25.3rem ;
+  }
 }
