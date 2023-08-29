@@ -70,7 +70,7 @@ const Cashier = () => {
               />
             </div>
             {/* sale cards */}
-            <div className="px-4 pt-4 flex flex-wrap gap-4 overflow-scroll   ">
+            <div className="px-5 pt-4  flex flex-wrap gap-4 overflow-scroll   ">
               {products?.map((pd,i)=>{
                 return(
                   <SaleCard key={i} pd={pd}  />

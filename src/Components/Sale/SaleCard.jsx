@@ -13,9 +13,9 @@ const SaleCard = ({ pd }) => {
   const dispatch=useDispatch();
   return (
     <div className="mt-1 " onClick={() => dispatch(addtoReciept(pd)) }>
-      <Card sx={{ minWidth: 120, }}>
+      <Card sx={{ minWidth: 180 }}>
         <CardMedia
-          sx={{ height: 100 }}
+          sx={{ height: 120, objectFit:"fill" }}
           image={pd?.photo}
           title={pd?.name}
         />
@@ -23,7 +23,7 @@ const SaleCard = ({ pd }) => {
           <Typography  sx={{ color: "#f5f5f5",fontSize:"1rem",fontWeight:"bold",textAlign:"end" }}  component="div">
            {pd?.name.slice(0,5)}
           </Typography>
-          <Typography sx={{ color: "#f5f5f5",textAlign:"end"  }}  component="div">
+          <Typography sx={{ color: "#f5f5f5",textAlign:"end" }} variant="p" component="div">
             {pd?.sale_price} MMK
           </Typography>
         </CardContent>
