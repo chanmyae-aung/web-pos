@@ -1,7 +1,11 @@
 import React from 'react'
 import { BiChevronDown } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { addProductMore_information, addProductName, addProductUnit } from '../../Feature/Service/productSlice';
+
 
 const FirstStep = ({toggleSelect, display, setDisplay, select}) => {
+  const dispatch=useDispatch()
   return (
     <div>
         <section
@@ -10,6 +14,7 @@ const FirstStep = ({toggleSelect, display, setDisplay, select}) => {
               <div className="flex">
                 <label className="w-[30%]">Name</label>
                 <input
+                onChange={e=>dispatch(addProductName({name:e.target.value}))}
                   placeholder="Enter product name"
                   className={`w-[70%] outline-none border rounded px-5 py-2`}
                   type="text"
@@ -57,7 +62,7 @@ const FirstStep = ({toggleSelect, display, setDisplay, select}) => {
               </div>
             </div>
           </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <label className="w-[30%]">Stock</label>
                 <input
                   placeholder="Enter your Stock of product"
@@ -66,10 +71,11 @@ const FirstStep = ({toggleSelect, display, setDisplay, select}) => {
                   name=""
                   id=""
                 />
-              </div>
+              </div> */}
               <div className="flex">
                 <label className="w-[30%]">Unit</label>
                 <input
+                onChange={(e)=>dispatch(addProductUnit({unit:e.target.value}))}
                   placeholder="Enter unit"
                   className={`w-[70%] outline-none border rounded px-5 py-2`}
                   type="text"
@@ -80,6 +86,7 @@ const FirstStep = ({toggleSelect, display, setDisplay, select}) => {
               <div className="flex">
                 <label className="w-[30%]">More info</label>
                 <textarea
+                onChange={e=>dispatch(addProductMore_information({more_information:e.target.value}))}
                   rows={3}
                   placeholder="Enter more info about the product"
                   className={`w-[70%] bg-[#202124] outline-none border rounded px-5 py-2`}

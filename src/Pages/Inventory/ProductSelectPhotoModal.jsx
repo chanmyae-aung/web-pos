@@ -1,25 +1,23 @@
+
 import Cookies from "js-cookie";
 import React, { useRef } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { useGetMediaQuery } from "../Feature/API/mediaApi";
+import { useGetMediaQuery } from '../../Feature/API/mediaApi'
 import { useDispatch } from "react-redux";
-import { addPhoto } from "../Feature/Service/userSlice";
-
-export default function SelectPhotoModal({ toggleShow }) {
-  const token = Cookies.get("token");
-  const fileInputRef = useRef(null);
-  const dispatch = useDispatch()
-  const uploadPhoto = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const { data } = useGetMediaQuery(token);
-  const image = data?.data.map((i) => i);
-  console.log(image);
-
-
+import { addProductPhoto } from "../../Feature/Service/productSlice";
+const ProductSelectPhotoModal = ({toggleShow }) => {
+    const token = Cookies.get("token");
+    const fileInputRef = useRef(null);
+    const dispatch = useDispatch()
+    const uploadPhoto = () => {
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    };
+  
+    const { data } = useGetMediaQuery(token);
+    const image = data?.data.map((i) => i);
+    console.log(image);
   return (
     <main className="w-[46.5rem] h-fit bg-transparent flex justify-center absolute border">
       <div className={`w-full bg-[#161618]`}>
@@ -61,7 +59,7 @@ export default function SelectPhotoModal({ toggleShow }) {
             return (
               <div onClick={() => {
                 toggleShow()
-                dispatch(addPhoto({user_photo: i.url}))}}
+                dispatch(addProductPhoto({photo: i.url}))}}
                 key={i.id}
                 className="flex flex-col w-40 h-36 rounded overflow-hidden cursor-pointer justify-center items-center gap-2"
               >
@@ -76,5 +74,7 @@ export default function SelectPhotoModal({ toggleShow }) {
         </div>
       </div>
     </main>
-  );
+  )
 }
+
+export default ProductSelectPhotoModal

@@ -10,10 +10,12 @@ export default function Breadcrumb({
   thirdRoute,
   btnText,
   icon,
+  addProduct,
   createUser,
   editUser,
   editProfile,
-  save
+  save,
+  showBtn
 }) {
   const nav = useNavigate();
   return (
@@ -42,11 +44,13 @@ export default function Breadcrumb({
             </Link>
           </Breadcrumbs>
         </div>
-        <div className="w-fit px-6 py-2 flex items-center gap-2 rounded font-semibold">
+       {
+        showBtn && (
+          <div className={`w-fit px-6 py-2 flex items-center gap-2 rounded font-semibold`}>
           <button
             onClick={() => {
               (createUser && nav("/create-user")) ||
-                (editProfile && nav("/edit-profile")) ||
+                (editProfile && nav("/edit-profile") ) ||
                 (editUser && nav("/user-overview"));
                 save && save()
             }}
@@ -56,6 +60,8 @@ export default function Breadcrumb({
             {btnText}
           </button>
         </div>
+        )
+       }
       </div>
     </div>
   );

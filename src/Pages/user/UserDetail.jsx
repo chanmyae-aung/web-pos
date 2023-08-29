@@ -18,7 +18,7 @@ export default function UserDetail() {
     <div className={`w-full`}>
     {/* path breadcrumbs */}
     <div>
-    <Breadcrumb icon={true} btnText={"Create"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
+    <Breadcrumb showBtn={true} icon={true} btnText={"Create"} title={"User"} firstRoute={"User"} secondRoute={"Overview"}/>
     </div>
     {/* path breadcrumbs */}
     <main className={`flex items-center mt-24`}>

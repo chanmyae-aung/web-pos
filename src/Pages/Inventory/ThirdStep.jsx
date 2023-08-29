@@ -1,39 +1,41 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Button from '../../Components/Button'
 import { MdOutlineEdit } from 'react-icons/md'
-const ThirdStep = () => {
-    const editImage = document.querySelector(".file")
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductPhoto } from '../../Feature/Service/productSlice';
+const ThirdStep = ({toggleShow}) => {
+
+  const {user_photo} = useSelector(state => state.userSlice)
+  console.log(user_photo)
   return (
     <div>
-    <section
-          className={`w-full bg-[#161618]`}
-        >
-          <div className="w-full flex flex-col items-center justify-center ">
-            <h2 className="my-10">Upload Photo</h2>
+       <section className={`w-full bg-[#161618]`}>
+        <div className="w-full flex flex-col items-center justify-center ">
+          <h2 className="my-10">Upload Photo</h2>
+          <div
+            className={`w-40 h-40 relative rounded-full border-2 border-dashed flex justify-center items-center`}
+          >
+            <img
+              className={`w-full h-full object-cover rounded-full`}
+              src={user_photo ? user_photo : `https://img.icons8.com/?size=512&id=108652&format=png`}
+              alt=""
+            />
             <div
-              className={`w-40 h-40 relative rounded-full border-2 border-dashed p-1 flex justify-center items-center`}
+              onClick={toggleShow}
+              className={`flex justify-center cursor-pointer z-50 absolute bg-slate-50 text-slate-900 right-3  bottom-1 items-center text-xs gap-1 border-2 rounded-full w-8 h-8 px-1 py-0.5`}
             >
-              <img
-                className={`w-full`}
-                src={`https://cdn-icons-png.flaticon.com/512/8787/8787106.png`}
-                alt=""
-              />
-              <div
-                onClick={() => editImage.click()}
-                className={`flex justify-center cursor-pointer absolute bg-[#202124] right-3  bottom-1 items-center text-xs gap-1 border-2 rounded-full w-8 h-8 px-1 py-0.5`}
-              >
-                <MdOutlineEdit />
-                <input className="file hidden" type="file" name="" id="" />
-              </div>
-            </div>
-            <div className="my-10">
-              <Button
-                text={"Clear Photo"}
-                className={`border border-gray-400 `}
-              />
+              <MdOutlineEdit />
+
             </div>
           </div>
-        </section>
+          <div className="my-10">
+            <Button
+              text={"Clear Photo"}
+              className={`border border-gray-400 `}
+            />
+          </div>
+        </div>
+      </section>
 </div>
   )
 }

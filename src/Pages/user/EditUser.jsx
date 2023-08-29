@@ -78,6 +78,7 @@ export default function EditUser() {
       {/* path breadcrumbs */}
       <div>
         <Breadcrumb
+        showBtn={true}
           editUser
           btnText={"User list"}
           title={"User"}

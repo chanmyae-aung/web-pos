@@ -75,6 +75,7 @@ export default function MyAccount() {
       <div>
         <Breadcrumb
           save={handleUpdateProfile}
+        showBtn={true}
           editProfile={true}
           btnText={"Save"}
           title={"Profile"}
