@@ -1,11 +1,11 @@
 import React from "react";
-
 import { MdOutlineEdit } from "react-icons/md";
-
 import { BiSolidUser } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const ProductRef = () => {
   const editImage = document.querySelector(".file");
+
   return (
     <div className={`w-full`}>
       <main className={`flex items-center mt-24`}>

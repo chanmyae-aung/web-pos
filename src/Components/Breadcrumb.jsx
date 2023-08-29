@@ -14,7 +14,7 @@ export default function Breadcrumb({
   createUser,
   editUser,
   editProfile,
-  save
+  save,
   showBtn
 }) {
   const nav = useNavigate();
@@ -50,7 +50,7 @@ export default function Breadcrumb({
           <button
             onClick={() => {
               (createUser && nav("/create-user")) ||
-                (editProfile && nav("/edit-profile") ;) ||
+                (editProfile && nav("/edit-profile") ) ||
                 (editUser && nav("/user-overview"));
                 save && save()
             }}

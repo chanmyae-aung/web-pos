@@ -12,12 +12,17 @@ import ProductRef from "./ProductRef";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { useCreateProductMutation } from "../../Feature/API/productApi";
+import SelectPhotoModal from "../../Components/SelectPhotoModal";
+import ProductSelectPhotoModal from "./ProductSelectPhotoModal";
 
 
 const AddProduct = () => {
   const token = Cookies.get("token");
   const nav = useNavigate();
-  const editImage = document.querySelector(".file");
+  const [show, setShow] = useState(false);
+  const toggleShow = () => {
+    setShow(!show);
+  };
 
   const [state, setState] = useState({
     FirstStep: true,
@@ -53,9 +58,10 @@ const AddProduct = () => {
   const toggleSelect = () => {
     setSelect(!select);
   };
- const productData =useSelector(state=> console.log(state.productSlice));
+ const productData =useSelector(state=> state.productSlice);
+ console.log(productData);
  const [createProduct]=useCreateProductMutation();
- const handleCreateUser = async (e) => {
+ const handleCreateProduct = async (e) => {
   e.preventDefault();
   const {data} = await createProduct({productData, token})
   console.log(data)
@@ -75,7 +81,13 @@ const AddProduct = () => {
         />
       </div>
       {/* path breadcrumbs */}
-
+      <div
+        className={`${
+          show ? "scale-y-1" : "scale-y-0"
+        } transition-all duration-400 origin-center absolute z-20 items-center bg-[#202124] justify-center`}
+      >
+        <ProductSelectPhotoModal setShow={setShow} toggleShow={toggleShow} />
+      </div>
       <main className="mt-7">
         <form action="" className={`flex gap-10`}>
           {/* Personal Info */}
@@ -103,7 +115,7 @@ const AddProduct = () => {
           {/* Photo Upload  */}
           {state.ThirdStep && (
             <div className="w-[70%]">
-              <ThirdStep  />
+              <ThirdStep   toggleShow={toggleShow}  />
             </div>
           )}
           {/* Create Step  */}
@@ -156,7 +168,7 @@ const AddProduct = () => {
               </div>
             )}
             {state.createStep && (
-              <div className="my-5 cursor-pointer">
+              <div onClick={handleCreateProduct} className="my-5 cursor-pointer">
                 <Button icon={true} text={"Create"} />
               </div>
             )}
