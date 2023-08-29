@@ -13,17 +13,17 @@ const SaleCard = ({ pd }) => {
   const dispatch=useDispatch();
   return (
     <div className="mt-1 " onClick={() => dispatch(addtoReciept(pd)) }>
-      <Card sx={{ minWidth: 120 }}>
+      <Card sx={{ minWidth: 120, }}>
         <CardMedia
           sx={{ height: 100 }}
           image={pd?.photo}
           title={pd?.name}
         />
-        <CardContent sx={{height:75}}>
-          <Typography  sx={{ color: "#161618" }} variant="h5" component="div">
+        <CardContent sx={{height:75,background:"#161618"}}>
+          <Typography  sx={{ color: "#f5f5f5",fontSize:"1rem",fontWeight:"bold",textAlign:"end" }}  component="div">
            {pd?.name.slice(0,5)}
           </Typography>
-          <Typography sx={{ color: "#161618" }} variant="p" component="div">
+          <Typography sx={{ color: "#f5f5f5",textAlign:"end"  }}  component="div">
             {pd?.sale_price} MMK
           </Typography>
         </CardContent>
