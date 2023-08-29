@@ -22,7 +22,7 @@ const Cashier = () => {
         <h1 className="px-2 w-full py-2 flex text-xl bg-[#3F4245] justify-between border-b border-gray-700">MMS POS
         </h1>
         </NavLink>
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           {/* receipt section 1 (bought product list) */}
 
           <div className="w-[70%]  h-full px-2 pt-3 ">
@@ -46,7 +46,7 @@ const Cashier = () => {
             </Breadcrumbs>
             <div className=" flex justify-between pb-3 border-b border-gray-700 ">
               <div className="flex gap-5 mt-2">
-                <a className="text-[#f5f5f5] hover:text-blue-500 active:text-blue-700">
+                <a className="text-[#f5f5f5] underline hover:text-blue-500 active:text-blue-700">
                   All
                 </a>
                 <a className="text-[#f5f5f5] hover:text-blue-500 active:text-blue-700">

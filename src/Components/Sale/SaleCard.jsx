@@ -13,7 +13,7 @@ const SaleCard = ({ pd }) => {
   const dispatch=useDispatch();
   return (
     <div className="mt-1 " onClick={() => dispatch(addtoReciept(pd)) }>
-      <Card sx={{ minWidth: 180 }}>
+      <Card sx={{ minWidth: 150 }}>
         <CardMedia
           sx={{ height: 120, objectFit:"fill" }}
           image={pd?.photo}
