@@ -4,7 +4,7 @@ import { profileApi } from "../API/profileApi";
 import authSlice from "./authSlice";
 import { userApi } from "../API/userApi";
 import userSlice from "./userSlice";
-import { api } from '../API/mediaSlice'
+import { api } from '../API/mediaApi'
 import { getallProductsApi } from "../API/getallProductsApi";
 import { saleApi } from "../API/saleApi";
 import recieptSlice from "./recieptSlice";

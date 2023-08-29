@@ -1,6 +1,5 @@
 import { Group } from "@mantine/core";
-import { useGetMediaQuery } from "../../Feature/API/mediaSlice";
-
+import { useGetMediaQuery } from "../../Feature/API/mediaApi";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import {
   AiOutlineClose,
@@ -14,9 +13,9 @@ import { Table } from "@mantine/core";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiCopyDuotone } from "react-icons/pi";
 import Breadcrumb from "../../Components/Breadcrumb";
-import { useUploadMediaMutation } from "../../Feature/API/mediaSlice";
+import { useUploadMediaMutation } from "../../Feature/API/mediaApi";
 import Cookies from "js-cookie";
-import { useDeleteMediaMutation } from "../../Feature/API/mediaSlice";
+import { useDeleteMediaMutation } from "../../Feature/API/mediaApi";
 
 //Expanded image component
 const ExpandedImageView = ({ image, onClose }) => (
@@ -36,7 +35,7 @@ const Mediapgwpic = (props) => {
   const [deleteMedia] = useDeleteMediaMutation(); //deleting media calling
   const token = Cookies.get("token"); //cookie retrieving
   const [uploadMedia] = useUploadMediaMutation(); //media upload calling
-  const { data: mediaData, isLoading, isError } = useGetMediaQuery(); //media upload retrieving
+  const { data: mediaData, isLoading, isError } = useGetMediaQuery(token); //media upload retrieving
   const media = mediaData || [];
   const [expandedImageId, setExpandedImageId] = useState(null); //expanded image state
   const [displayState, setDisplayState] = useState(false); //toggle view state
@@ -64,10 +63,10 @@ const Mediapgwpic = (props) => {
         console.error("Error uploading files:", result.error);
       } else {
         // Handle success, e.g., update your component state
-        console.log("Files uploaded successfully:", result.data);
+      alert('File uploaded sucessfully')
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      alert.error("An error occurred:", error)
     }
   };
   const images = mediaData?.data; 
@@ -111,7 +110,7 @@ const Mediapgwpic = (props) => {
           {" "}
           <div className="  flex">
             <RiDeleteBin5Line
-              onClick={() => handleDelete(element.id)}
+              onClick={() => handleDelete(element.id,token)}
               className=" text-lg m-1 cursor-pointer hover:text-red-700"
             />
             <PiCopyDuotone

@@ -12,10 +12,10 @@ const SconStep = () => {
           <div className="flex">
             <label className="w-[30%]">actual-price</label>
             <input
-           onChange={e=>dispatch(addProductActual_price({actual_price:e.target.value}))}
+           onChange={e=>dispatch(addProductActual_price({actual_price:parseInt(e.target.value)}))}
               placeholder="Enter actual price of the product"
               className={`w-[70%] outline-none border rounded px-5 py-2`}
-              type="text"
+              type="number"
               name=""
               id=""
             />
@@ -23,10 +23,10 @@ const SconStep = () => {
           <div className="flex">
             <label className="w-[30%]">sale-price</label>
             <input
-            onChange={e=>dispatch(addProductSale_price({sale_price:e.target.value}))}
+            onChange={e=>dispatch(addProductSale_price({sale_price:parseInt(e.target.value)}))}
               placeholder="Enter the price that you want to sell "
               className={`w-[70%] outline-none border rounded px-5 py-2`}
-              type="text"
+              type="number"
               name=""
               id=""
             />

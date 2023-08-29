@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import React, { useRef } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { useGetMediaQuery } from '../../Feature/API/mediaSlice'
+import { useGetMediaQuery } from '../../Feature/API/mediaApi'
 import { useDispatch } from "react-redux";
 import { addProductPhoto } from "../../Feature/Service/productSlice";
 const ProductSelectPhotoModal = ({toggleShow }) => {
