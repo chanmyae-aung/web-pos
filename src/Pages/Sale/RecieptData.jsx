@@ -5,52 +5,90 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const RecieptData = () => {
-    const { totalPrice, tax } = useSelector((state) => state.recieptSlice);
-
+  const { totalPrice, tax, voucherData } = useSelector(
+    (state) => state.recieptSlice
+  );
+  //console.log(voucherData?.data?.voucher_records);
+  const printHandler = () => {
+    window.print();
+  };
   return (
     <>
-      <div className="bg-[#202124] text-[#f5f5f5] w-full h-screen ">
-        <div className="px-5 py-3 border-b">
+      <div className="bg-[#202124] vendorListHeading print:h-auto text-[#f5f5f5] w-full h-screen ">
+        <div className=" print:hidden px-5 py-3 border-b">
+          {/* back btn to go to dashboard */}
           <Link className="text-xl flex gap-1 " to="/">
-            <BiArrowBack className="mt-1" />
+          <BiArrowBack className="mt-1" />
             Back
           </Link>
         </div>
         <div className="flex justify-center">
-        <div className="text-[#f5f5f5] bg-[#161618] my-2 p-3 rounded-sm shadow-lg   ">
-      <div className="flex flex-col">
-        <div
-          className={`h-full w-full l bg-[#161618]`}
-        >
-          <Typography
-            sx={{ fontSize: "1.5rem", paddingX: "10px" }}
-            gutterBottom
-          >
-            Reciept
-          </Typography>
-          <div className="boughtList">
-           <h1>data here</h1>
-          </div>
-        </div>
-      
-        <div className="mt-auto flex flex-col justify-start ">
-          {/* total amount */}
-        
-            <div className=" mt-5 pt-5 px-5 ">
-              {" "}
-              <h1 className="text-xl font-medium">
-                Total Amount : <span>{totalPrice}</span> MMK
-              </h1>
-              <span className="text-sm font-thin">Tax : {tax.toFixed(2)}</span>
+          <div className="text-[#f5f5f5] bg-[#161618] print:bg-[#f5f5f5] print:text-[#202124] my-3 py-4 px-3 rounded-sm shadow-lg   ">
+            <div className="flex flex-col print:bg-[#f5f5f5] print:text-[#202124]">
+              <div
+                className={`h-full w-full  bg-[#161618] print:bg-[#f5f5f5] print:text-[#202124]`}
+              >
+                <Typography
+                  sx={{ fontSize: "2rem", paddingX: "10px" }}
+                  gutterBottom
+                >
+                  Reciept
+                </Typography>
+                {/* map data from bought list  */}
+                <div className="boughtList print:bg-[#f5f5f5] print:text-[#202124]">
+                  {voucherData?.data?.voucher_records?.map((item) => {
+                    return (
+                      <Link
+                        key={item?.product_id}
+                        className="mt-5  px-4 pt-2 mx-auto overflow-visible"
+                      >
+                        <div className="flex justify-between border-b mb-1 pb-2 border-gray-600">
+                          <div className="flex flex-col">
+                            <p className="font-semibold leading-loose tracking-wider text-[1rem]">
+                              {/* {item?.name.slice(0, 7)} */}
+                              {item?.product_id}
+                            </p>
+                            <span className="text-[0.8rem] font-semibold">
+                              <span className="mr-2">
+                                {item?.quantity}
+                                pcs
+                              </span>
+                              <span>{item?.cost} MMK</span>
+                            </span>
+                          </div>
+                          <span className="text-semibold">
+                            {Number(item?.quantity) * item?.cost}
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-auto flex flex-col justify-start ">
+                {/* total amount and tax */}
+
+                <div className=" mt-5 pt-5 px-5 ">
+                  {" "}
+                  <h1 className="text-xl font-medium">
+                    Total Amount : <span>{totalPrice}</span> MMK
+                  </h1>
+                  <span className="text-sm font-semibold print:bg-[#f5f5f5] print:text-[#202124]">
+                    Tax : {tax.toFixed(2)}
+                  </span>
+                </div>
+
+                {/* Print Button */}
+                <button
+                  onClick={printHandler}
+                  className="print:hidden mt-5 px-3 py-2 rounded self-center bg-[#202124] "
+                >
+                  Print
+                </button>
+              </div>
             </div>
-        
-          {/* Print Button */}
-            <button className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black">
-              Print
-            </button>
-        </div>
-      </div>
-    </div>
+          </div>
         </div>
       </div>
     </>

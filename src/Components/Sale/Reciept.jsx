@@ -3,14 +3,18 @@ import Calculator from "./Calculator";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { clearList, setListSelector, voucherUpdate } from "../../Feature/Service/recieptSlice";
+import {
+  clearList,
+  setListSelector,
+  voucherUpdate,
+} from "../../Feature/Service/recieptSlice";
 import { useCheckoutMutation } from "../../Feature/API/saleApi";
 import Cookies from "js-cookie";
-// import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
-const Reciept = ({ calculator, printBtn }) => {
+const Reciept = () => {
   const dispatch = useDispatch();
-  const { reciept, totalPrice, listSelector, tax,voucherData } = useSelector(
+  const { reciept, listSelector} = useSelector(
     (state) => state.recieptSlice
   );
 
@@ -27,32 +31,29 @@ const Reciept = ({ calculator, printBtn }) => {
       };
     }),
   };
-  console.log(newVoucherData);
+  //console.log(newVoucherData);
 
-  const errorMessage = (error) => {
-    Swal.fire({
-      title: error,
-      icon: 'warning',
-      iconColor: "#E64848",
-      background: "#161618",
-      // showCloseButton: true,
-      confirmButtonColor: '#E64848',
-      confirmButtonText: 'OK'
-    })
-  }
-
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   // after voucher done click on the payment button to send data to Api
   const paymentHandler = async () => {
     try {
       const data = await checkout({ token, newVoucherData });
       console.log(data);
-      if(data?.data?.data){
+      if (data?.data?.data) {
         dispatch(voucherUpdate(data?.data));
-        navigate("/sale-reciept")
+        toast.success("Reciept Procressing!", {
+          position: "top-right",
+          autoClose: 2000,
+          theme: "light",
+        });
+        navigate("/sale-reciept");
         dispatch(clearList());
-      }else if(data?.error){
-        errorMessage(data?.error?.data?.errors?.voucher_records) //pyin ya own ml
+      } else if (data?.error) {
+        toast.error("Something is wrong!", {
+          position: "top-right",
+          autoClose: 2000,
+          theme: "light",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -63,25 +64,19 @@ const Reciept = ({ calculator, printBtn }) => {
     dispatch(setListSelector(id));
   };
 
-  const printHandler = () => {
-    window.print();
-  };
+
   return (
     <div className="text-[#f5f5f5] bg-[#161618] h-screen   ">
       <div className="flex flex-col h-full">
-        <div
-          className={`${
-            printBtn == true
-              ? `h-full overflow-scroll bg-[#161618]`
-              : `h-[50%]  overflow-scroll overflow-x-hidden bg-[#161618]`
-          }`}
-        >
+        {/* bought list Header */}
+        <div className='h-[50%]  overflow-scroll overflow-x-hidden bg-[#161618]'>
           <Typography
             sx={{ fontSize: "1.5rem", paddingX: "10px" }}
             gutterBottom
           >
             Reciept
           </Typography>
+          {/* map data from SaleCard */}
           <div className="boughtList">
             {reciept?.map((item) => {
               return (
@@ -116,29 +111,11 @@ const Reciept = ({ calculator, printBtn }) => {
             })}
           </div>
         </div>
-        {calculator && (
-          <div className="h-[50%]  ">
+        {/* calculator Ui for qty handling */}
+        <div className="h-[50%]  ">
             <Calculator paymentHandler={paymentHandler} />
           </div>
-        )}
-        <div className="mt-auto flex flex-col justify-start ">
-          {/* total amount */}
-          {printBtn && (
-            <div className=" mt-5 pt-5 px-5 ">
-              {" "}
-              <h1 className="text-xl font-medium">
-                Total Amount : <span>{totalPrice}</span> MMK
-              </h1>
-              <span className="text-sm font-thin">Tax : {tax.toFixed(2)}</span>
-            </div>
-          )}
-          {/* Print Button */}
-          {printBtn && (
-            <button className="print:hidden mt-5 px-2 py-1 rounded self-center bg-black">
-              Print
-            </button>
-          )}
-        </div>
+       
       </div>
     </div>
   );
